@@ -1,0 +1,234 @@
+<!-- BreadcrumbList Start -->
+<script>
+    (function () {
+
+        const breadcrumbMap = {
+            "adler": "Адлер",
+            "sochi": "Сочи",
+            "astrakhan": "Астрахань",
+            "balashiha": "Балашиха",
+            "barnaul": "Барнаул",
+            "bijsk": "Бийск",
+            "vladivostok": "Владивосток",
+            "vladikavkaz": "Владикавказ",
+            "vladimir": "Владимир",
+            "volgograd": "Волгоград",
+            "voronezh": "Воронеж",
+            "gatchina": "Гатчина",
+            "ekaterinburg": "Екатеринбург",
+            "ivanovo": "Иваново",
+            "izhevsk": "Ижевск",
+            "yoshkar-ola": "Йошкар-Ола",
+            "kazan": "Казань",
+            "kaliningrad": "Калининград",
+            "kaluga": "Калуга",
+            "kirov": "Киров",
+            "komsomolsk-na-amure": "Комсомольск-на-Амуре",
+            "krasnodar": "Краснодар",
+            "krasnoyarsk": "Красноярск",
+            "kursk": "Курск",
+            "lipetsk": "Липецк",
+            "magnitogorsk": "Магнитогорск",
+            "moscow": "Москва",
+            "naberezhnye-chelny": "Набережные Челны",
+            "nalchik": "Нальчик",
+            "nahodka": "Находка",
+            "nizhniy-novgorod": "Нижний Новгород",
+            "novorossiysk": "Новороссийск",
+            "novosibirsk": "Новосибирск",
+            "obninsk": "Обнинск",
+            "omsk": "Омск",
+            "orel": "Орел",
+            "orsk": "Орск",
+            "perm": "Пермь",
+            "petrozavodsk": "Петрозаводск",
+            "prokopievsk": "Прокопьевск",
+            "pushkin": "Пушкин",
+            "rostov": "Ростов-на-Дону",
+            "ryazan": "Рязань",
+            "samara": "Самара",
+            "saint-petersburg": "Санкт-Петербург",
+            "saransk": "Саранск",
+            "saratov": "Саратов",
+            "serpukhov": "Серпухов",
+            "smolensk": "Смоленск",
+            "stavropol": "Ставрополь",
+            "stary-oskol": "Старый Оскол",
+            "sterlitamak": "Стерлитамак",
+            "syktyvkar": "Сыктывкар",
+            "taganrog": "Таганрог",
+            "tambov": "Тамбов",
+            "tver": "Тверь",
+            "tolyatti": "Тольятти",
+            "tula": "Тула",
+            "tyumen": "Тюмень",
+            "ulan-ude": "Улан-Удэ",
+            "ulyanovsk": "Ульяновск",
+            "ussuriysk": "Уссурийск",
+            "ufa": "Уфа",
+            "chelyabinsk": "Челябинск",
+            "cherepovets": "Череповец",
+            "cherkessk": "Черкесск",
+            "yuzhno-sahalinsk": "Южно-Сахалинск",
+            "abakan": "Абакан",
+            "almetevsk": "Альметьевск",
+            "angarsk": "Ангарск",
+            "armavir": "Армавир",
+            "arhangelsk": "Архангельск",
+            "balakovo": "Балаково",
+            "belgorod": "Белгород",
+            "berezniki": "Березники",
+            "blagoveshchensk": "Благовещенск",
+            "bryansk": "Брянск",
+            "volgodonsk": "Волгодонск",
+            "volzhskij": "Волжский",
+            "vologda": "Вологда",
+            "voskresensk": "Воскресенск",
+            "groznyj": "Грозный",
+            "dzerzhinsk": "Дзержинск",
+            "domodedovo": "Домодедово",
+            "zelenograd": "Зеленоград",
+            "zlatoust": "Златоуст",
+            "irkutsk": "Иркутск",
+            "kamensk-uralskij": "Каменск-Уральский",
+            "kemerovo": "Кемерово",
+            "kerch": "Керчь",
+            "korolev": "Королев",
+            "kostroma": "Кострома",
+            "krasnogorsk": "Красногорск",
+            "kurgan": "Курган",
+            "lyubercy": "Люберцы",
+            "makhachkala": "Махачкала",
+            "murmansk": "Мурманск",
+            "mytishchi": "Мытищи",
+            "nizhnevartovsk": "Нижневартовск",
+            "nizhnijtagil": "Нижний Тагил",
+            "nizhnekamsk": "Нижнекамск",
+            "novokuzneck": "Новокузнецк",
+            "novocherkassk": "Новочеркасск",
+            "odincovo": "Одинцово",
+            "orenburg": "Оренбург",
+            "penza": "Пенза",
+            "petropavlovsk-kamchatskij": "Петропавловск-Камчатский",
+            "podolsk": "Подольск",
+            "pskov": "Псков",
+            "rybinsk": "Рыбинск",
+            "sevastopol": "Севастополь",
+            "severodvinsk": "Северодвинск",
+            "simferopol": "Симферопль",
+            "surgut": "Сургут",
+            "syzran": "Сызрань",
+            "tomsk": "Томск",
+            "habarovsk": "Хабаровск",
+            "hasavyurt": "Хасавюрт",
+            "himki": "Химки",
+            "cheboksary": "Чебоксары",
+            "chekhov": "Чехов",
+            "shatura": "Шатура",
+            "ehngels": "Энгельс",
+            "yakutsk": "Якутск",
+            "yaroslavl": "Ярославль",
+            "velikiy-novgorod": "Великий Новгород",
+            "blog": "Блог",
+            "parents": "Выбор школы",
+            "soft-skills": "Гибкие навыки",
+            "problemy-v-shkole": "Проблемы в школе",
+            "semeynoe-obrazovanie": "Семейное образование",
+            "podgotovka-k-ogeege": "Подготовка к ОГЭ/ЕГЭ",
+            "school": "О нас",
+            "uchebnyy-process": "Учебный процесс"
+        };
+
+        const origin = window.location.origin;
+        const pathname = window.location.pathname;
+
+        let segments = pathname
+            .split("/")
+            .filter(Boolean);
+
+        const visibleSegments = segments.filter(segment => {
+            return !segment.startsWith("tpost");
+        });
+
+        const breadcrumbs = [];
+
+        breadcrumbs.push({
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "@id": origin + "/",
+                "name": "Главная"
+            }
+        });
+
+        let currentPath = "";
+        let position = 2;
+
+        visibleSegments.forEach((segment, index) => {
+
+            currentPath += "/" + segment;
+
+            let name = decodeURIComponent(segment)
+                .replace(/-/g, " ")
+                .replace(/\b\w/g, l => l.toUpperCase());
+
+
+            if (breadcrumbMap[segment]) {
+                name = breadcrumbMap[segment];
+            }
+
+            const isLast = index === visibleSegments.length - 1;
+
+            if (isLast) {
+
+                const title = document.title
+                    .split("|")[0]
+                    .trim();
+
+                if (title) {
+                    name = title;
+                }
+            }
+
+            breadcrumbs.push({
+                "@type": "ListItem",
+                "position": position,
+                "item": {
+                    "@id": isLast
+                        ? origin + pathname
+                        : origin + currentPath,
+                    "name": name
+                }
+            });
+
+            position++;
+        });
+
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": breadcrumbs
+        };
+
+        const existing = document.querySelector(
+            'script[data-breadcrumbs-schema]'
+        );
+
+        if (existing) {
+            return;
+        }
+
+        const script = document.createElement("script");
+
+        script.type = "application/ld+json";
+        script.setAttribute(
+            "data-breadcrumbs-schema",
+            "true"
+        );
+        script.text = JSON.stringify(schema);
+
+        document.head.appendChild(script);
+
+    })();
+</script>
+<!-- BreadcrumbList End -->

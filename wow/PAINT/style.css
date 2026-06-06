@@ -1,0 +1,28 @@
+/* РЕДАКТОР paint*/
+
+body {
+    padding: 30px;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.brush {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid black;
+    border-radius: 50%;
+    translate: -50% -50%;
+    transition: scale .2s;
+    z-index: 2;
+}
+
+.paint {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: green;
+    z-index: 1;
+}
