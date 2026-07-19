@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модальное окно</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <button id="btn" class="button">OPEN</button>
+
+    <div id="modal">
+        <div class="modal-content">
+            <span class="close">x</span>
+            <div class="wrap">
+                <h2>Оставьте заявку на подробную консультацию</h2>
+                <div class="line"></div>
+                <form action="#send.php" name="myForm">
+                    <label for="name">Имя *</label>
+                    <input type="text" name="name" id="nm">
+                    <label for="email">Электронная почта *</label>
+                    <input type="text" name="email" id="eml">
+                    <label for="question">Ваш вопрос *</label>
+                    <textarea name="question" id="qst" rows="10"></textarea>
+                    <button id="send">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

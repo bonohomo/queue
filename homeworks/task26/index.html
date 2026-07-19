@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор деревянных органайзеров</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Калькулятор стоимости деревянного органайзера</h2>
+
+    <label>
+        Размер:
+        <select id="size">
+            <option value="1500">Маленький (1500 ₽)</option>
+            <option value="2500">Средний (2500 ₽)</option>
+            <option value="3500">Большой (3500 ₽)</option>
+        </select>
+    </label>
+
+    <br><br>
+
+    <label>
+        Резной узор:
+        <select id="pattern">
+            <option value="0">Подкова (+0 ₽)</option>
+            <option value="500">Дракон (+500 ₽)</option>
+            <option value="800">Слоны (+800 ₽)</option>
+            <option value="1200">Корабль (+1200 ₽)</option>
+        </select>
+    </label>
+
+    <br><br>
+
+    <img src="horseshoe.jpg" alt="Органайзер" class="image" id="img">
+
+    <br><br>
+
+    <label>
+        Количество:
+        <input type="number" id="count" value="1" min="1">
+    </label>
+
+    <br><br>
+
+    <button onclick="calculate()">Рассчитать</button>
+
+    <h3 id="result"></h3>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

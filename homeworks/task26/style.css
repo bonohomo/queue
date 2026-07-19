@@ -1,0 +1,13 @@
+body {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#input, #list {
+    display: inline-block;
+}
+
+.image {
+    height: 400px;
+    width: 300px;
+}

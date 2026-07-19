@@ -4428,6 +4428,8 @@ let regexp = /шаблон/флаги;
 
 /* 
 
+. - любой один символ
+
 \d (digit) - любая цифра
 
 \s (space) - пробельный символ (включая табуляция и перевод строки)
@@ -4436,7 +4438,7 @@ let regexp = /шаблон/флаги;
 
 \b - граница слова
 
-\p{} - 
+\p{} - юникод символ, L - любая буква
 
 \D - всё, кроме цифр
 
@@ -4867,8 +4869,8 @@ $ - конец строки (после последовательности н�
 
 
 
-// github
-// git
+// github - удаленная система контроля версий
+// git - локальная система контроля версий
 // система контроля версий
 
 // мы можем сделать набор контрольных точек, можем вернуться к версии, которая нас устраивает
@@ -4900,3 +4902,1538 @@ $ - конец строки (после последовательности н�
 // git commit -m "first commit" - сделать коммит и его название/описание
 
 // в файле .gitignore мы указываем те файлы, которые не должны попадать в git контроль версий
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// крестики нолики
+
+// let area = document.getElementById("area");
+// let currentPlayer = document.getElementById("curPlayer");
+// let cell;
+
+
+// let player = "x";
+// let stat = {
+//     'x': 0,
+//     'o': 0,
+//     'd': 0
+// }
+
+// let winIndex = [
+//     [1, 2, 3],
+//     [4, 5, 6],
+//     [7, 8, 9],
+//     [1, 4, 7],
+//     [2, 5, 8],
+//     [3, 6, 9],
+//     [1, 5, 9],
+//     [3, 5, 7]
+// ]
+
+// for (let i = 0; i < 9; i++) {
+//     area.innerHTML += "<div class='cell' data-pos='" + i + "'>"
+// }
+
+// cell = document.querySelectorAll(".cell");
+
+// for (let i = 0; i < cell.length; i++) {
+//     cell[i].addEventListener("click", cellClick);
+// }
+
+// function cellClick() {
+//     let data = [];
+
+//     if (!this.innerHTML) {
+//         this.innerHTML = player;
+//     } else {
+//         alert("Ячейка занята");
+//         return;
+//     }
+
+//     for (let i in cell) { // cell массив, in/of работают и массивами и элементами, in когда у нас в чистом виде массив из html элементов
+//         if (cell[i].innerHTML == player) {
+//             data.push(cell[i].getAttribute("data-pos"));
+//         }
+//     }
+
+//     if (checkWin(data)) {
+//         stat[player] += 1;
+//         alert("Выиграл: " + player);
+//     } else {
+//         let draw = true;
+//         for(let i in cell){
+//             if(cell[i].innerHTML == ''){
+//                 draw = false;
+//             }
+//         }
+//         if(draw){
+//             stat.d += 1;
+//             restart("Ничья");
+//         }
+//     }
+
+//     player = player == 'x' ? 'o' : 'x';
+//     currentPlayer.innerHTML = player.toUpperCase();
+
+//     console.log(data);
+
+// }
+
+// function checkWin(data) {
+//     for(let i in winIndex){
+//         let win = true;
+//         for(let j in winIndex[i]){
+//             let id = String(winIndex[i][j]);
+//             let ind = data.indexOf(id);
+
+//             if(ind == -1){
+//                 win = false;
+//             }
+//         }
+//         if(win){
+//             return true;
+//         }
+//     } 
+
+//     return false;
+// }
+
+// function restart(text){
+//     alert(text);
+//     for (let i = 0; i < cell.length; i++) {
+//         cell[i].innerHTML = "";
+//     }
+//     updateStat();
+// }
+
+// function updateStat(){
+//     document.getElementById("sX").innerHTML = stat.x;
+//     document.getElementById("sO").innerHTML = stat.o;
+//     document.getElementById("sD").innerHTML = stat.d;
+// }
+
+
+
+// let car = {
+//     name: "Volvo",
+//     year: 2019,
+//     colors: {
+//         first: "yellow",
+//         second: "blue"
+//     },
+//     color: [
+//         "black",
+//         "white",
+//         "red",
+//         "blue"
+//     ],
+//     hello: function(){
+//         document.writeln("Привет <br>");
+//     }
+// }
+
+// console.log(car);
+// document.writeln(car.name + " " + car.color[1] + " " + car.colors.second + "<br>"); // свойство
+// car.hello(); // вызов функции у объекта car // метод
+// // hello(); // функция
+
+// // let fill = car.color.filter(function(elem){
+// //     return elem.length < 5; // оператор сравнения возвращает либо true, либо false // проверяем длину каждого элемента, в итоге создаётся новый массив fill с строками удовлетворяющими условию в return
+// // });
+
+// // document.writeln(fill + "<br>");
+
+
+// // let mas = car.color.map(function(elem, index, all){
+// //     return index + ")" + elem + " массив: " + all + "<br>";
+// // });
+
+// // document.writeln("<br>" + mas + "<br>");
+
+// // let mas1 = car.color.map(elem => elem.toUpperCase());
+// // document.writeln("<br>" + mas1 + "<br>");
+
+
+// let mas2 = Object.keys(car.colors).map(function(elem){ // чтобы работали методы массивов нужно обратиться через Object.keys
+//     return elem + ": " + car.colors[elem] + "<br>";
+// });
+
+// document.writeln("<br>" + mas2 + "<br>");
+
+
+// let calc = {
+//     num1: 5,
+//     num2: 6,
+//     calculate: function(){
+//         // console.log(calc.num1); // так не пишут
+//         // // ==
+//         // console.log(this.num1);
+
+//         this.res = this.num1 * this.num2; // this.res создаёт ключ res
+
+
+//     }
+// }
+
+// calc.calculate();
+// document.writeln(calc.res);
+
+
+// let x = 15, y = 10;
+
+// // let coords = {
+// //     x: x,
+// //     y: y,
+// //     calcSq: function(){
+// //         document.writeln(this.x * this.y);
+// //     }
+// // }
+// // ==
+// let coords = {
+//     x,
+//     y,
+//     calcSq(){
+//         document.writeln(this.x * this.y);
+//     }
+// }
+
+// coords.calcSq(); // вызываем метод
+
+
+// let user = {
+//     login: {
+//         firstName: 'Kate',
+//         lastName: 'Pavlova'
+//     },
+//     psw: '123',
+//     role: 'guest'
+// }
+
+// let log = user.login.firstName;
+// console.log(log);
+
+// // ~
+
+// // деструктуризация объекта
+
+// // let {login: {firstName: f, lastName: l}, psw, role} = user; // : f - псевдоним, можно будет обращаться к ключу по нему 
+// // document.writeln(f + " " + l + " " + psw + " " + role);
+
+// let { login: { firstName: f, lastName: l }, ...rest } = user; // ...rest - придуманная перемнная, которая остальные включает, создаёт новый объект
+// document.writeln(f + " " + l + " " + rest.psw + " " + rest.role);
+
+
+
+
+// ФУНКЦИЯ КОНСТРУКТОР
+// во всех языках программирования есть объектно-ориентированное программирование (ООП) (в js в основном это строилось на функциях, но сейчас появилось через классы)
+// на основе этой функции реализуется ОПП
+
+// function Car(n, year){ // функция будет создавать два объекта // называется всегда с заглавной буквы
+//     this.name = n;
+//     this.year = year;
+// }
+
+// Car.prototype.getAge = function(){ // prototype - наследие от общего класса object // getAge наш метод
+//     return new Date().getFullYear() - this.year; // мы имеем доступ к функциям конструктора
+// } 
+
+// Car.prototype.color = "black";
+
+// let ford = new Car('Ford', 2019); // обращение к функции-конструктору
+// console.log(ford);
+// console.log(ford.getAge());
+// ford.color = "red";
+// console.log(ford.color);
+
+
+
+// let bmw = new Car('BMW', 2017);
+// console.log(bmw);
+// console.log(bmw.getAge());
+// console.log(bmw.color);
+
+
+
+
+// function User(pName, pAge){
+//     this.name = pName;
+//     this.age = pAge;
+//     this.displayInfo = function(){
+//         document.writeln("Имя: " + this.name + "; возраст: " + this.age + "<br>")
+//     }
+// }
+
+// let tom = new User("Tom", 26);
+// tom.displayInfo();
+
+
+
+
+// практическое применение
+// let form = document.form1; // доступ к форме по имени
+// form.addEventListener("submit", event => {
+//     event.preventDefault();
+
+//     let title = form.title.value;
+//     let text = form.text.value;
+//     let description = form.description.value;
+
+//     // console.log(title, text);
+//     // saveForm({title: title, text: text});
+//     // ==
+//     // saveForm({title, text}); // работает, если ключ и значение совпадают в названии
+//     saveForm({title, text, description});
+
+// });
+
+// // function saveForm(obj){
+
+// //     let formData = {
+// //         date: new Date().toLocaleDateString(),
+// //         title: obj.title,
+// //         text: obj.text,
+// //         description: obj.description
+// //     }
+
+// //     console.log("Form Data: ", formData);
+
+// // }
+
+// // function saveForm(obj){
+// //     let {title, text, description} = obj; // деструктуризация, чтобы каждый раз не обращаться к ключам через obj.
+// // ==
+// // function saveForm({title, text, description}){ // деструктуризация в принимаемых объектах, сразу
+
+// //     let formData = {
+// //         date: new Date().toLocaleDateString(),
+// //         title: otitle,
+// //         text: text,
+// //         description: description
+// //     }
+
+// //     console.log("Form Data: ", formData);
+
+// // }
+// // == самый короткий тип записи
+// function saveForm(obj){ // деструктуризация в принимаемых объектах, сразу
+
+//     let formData = {
+//         date: new Date().toLocaleDateString(),
+//         ...obj
+//     }
+
+//     console.log("Form Data: ", formData);
+
+// }
+
+
+// let cardsArray = [
+//     { name: 'card1', img: 'c0.gif' },
+//     { name: 'card2', img: 'c1.gif' },
+//     { name: 'card3', img: 'c2.gif' },
+//     { name: 'card4', img: 'c3.gif' },
+//     { name: 'card5', img: 'c4.gif' },
+//     { name: 'card6', img: 'c5.gif' },
+//     { name: 'card7', img: 'c6.gif' },
+//     { name: 'card8', img: 'c7.gif' }
+// ];
+
+// let firstCard = null;
+// let secondCard = null;
+// let lockBoard = false;
+
+// function createBoard(){
+//     let gameBoard = document.querySelector(".game-board");
+//     let suffledCards = [...cardsArray, ...cardsArray].sort(() => 0.5 - Math.random()); // соберёт так все объекты и перемешает их
+//     console.log(suffledCards);
+
+//     suffledCards.forEach(card => {
+//         let cardElement = document.createElement("div");
+//         cardElement.classList.add("card");
+//         cardElement.dataset.name = card.name; // пользовательский атрибут
+
+//         let cardImage = document.createElement("img");
+//         cardImage.src = card.img;
+//         cardElement.append(cardImage);
+
+
+//         cardElement.addEventListener('click', flipCard);
+//         gameBoard.append(cardElement);
+//     });
+// }
+
+// function flipCard(){
+//     if(lockBoard){
+//         return;
+//     }
+//     if(this === firstCard){
+//         return;
+//     }
+//     this.classList.add("flipper");
+
+//     if(!firstCard){ // если здесь было false (null)
+//         firstCard = this;
+//         return;
+//     }
+//     secondCard = this;
+//     checkForMatch();
+// }
+
+// function checkForMatch(){
+//     if(firstCard.dataset.name === secondCard.dataset.name){
+//         disabledCard();
+//     } else {
+//         unflipCards();
+//     }
+// }
+
+// function disabledCard(){
+//     firstCard.removeEventListener("click", flipCard);
+//     secondCard.removeEventListener("click", flipCard);
+//     resetBoard();
+// }
+
+// function unflipCards(){
+//     lockBoard = true;
+//     setTimeout(() => {
+//         firstCard.classList.remove("flipper");
+//         secondCard.classList.remove("flipper");
+//         resetBoard();
+//     }, 1000);
+// }
+
+// function resetBoard(){
+//     [firstCard, secondCard, lockBoard] = [null, null, null]; // каждому присваиваем Null
+// }
+
+// createBoard();
+
+
+// const используют, когда работают с массивами и объектами, так нужно
+
+// const week = { // const нельзя использовать с примитивными типами данных (не объектами) // с данными, которые наследуются от объекта можем работать, если мы не будем менять const
+//     name: "John"
+// }
+
+
+
+// const week = ["qqq", "www"]; // константа работает на пакет, а не на яблоки внутри него
+// week[0] = "Привет"; // можно поменять часть массива
+// // week = "Строка"; // нельзя изменить тип объекта
+
+
+// const book = {title: 'Дюна'};
+// const anotherBook = {title: 'Дюна'};
+// console.log(book == anotherBook); // false
+// объекты работают как ссылки на ячейки в памяти
+
+// let a = 5;
+// let b = 5;
+// console.log(a == b);
+// // в памяти это ячейки со значением 5
+
+
+// // по разному хранятся в памяти
+
+// const book = {title: 'Дюна'};
+// const anotherBook = book;
+// // кладём в anotherBook ссылку на ячейку book, то есть они ссылаются на одну ячейку
+// // ВАЖНО, если мы теперь положим новое значение в один объект, это значение будет в обоих объектах
+// anotherBook['price'] = 315; // добавить в объект ключ со значением
+// console.log(book);
+// console.log(anotherBook);
+// console.log(book == anotherBook); // false
+
+
+// массивы ведут себя точно так же как объекты
+
+// const mas1 = [1,2,3];
+// const mas2 = [1,2,3];
+// console.log(mas1 == mas2);
+// console.log(mas1);
+
+// let a = 5;
+// let b = 10;
+// console.log("a:", a);
+// console.log("b:", b);
+// a, b = b, a; // не работает
+// // [a, b] = [b, a];
+// console.log("a:", a);
+// console.log("b:", b);
+
+// const book = {title: 'Дюна'};
+// const edition = {published: 2025, title: "Вьюга"}
+// const anotherBook = Object.assign({}, book, edition); // создаёт новый объект по новому адресу и туда кладёт новое такое же содержимое // они ссылаются на разные области памяти
+// anotherBook['price'] = 315;
+// console.log(book);
+// console.log(anotherBook);
+// console.log(book == anotherBook);
+
+
+// const personData = [
+//     ['name', 'Сергей'],
+//     ['age', 37]
+// ]; // массив массивов
+// console.log(personData);
+// const person = Object.fromEntries(personData); // превращает вложенные массивы в объект // лишние элементы будут отброшены
+// console.log(person);
+
+
+// const first = null;
+// const second = {name: 'Bob'}
+
+// function printName(person){
+//     console.log(person?.name); // объект может быть, а может и не быть
+// }
+
+// printName(second);
+// printName(first); // при знаке вопроса тут будет undefined
+
+
+// const first = null;
+// const second = {
+//     name: 'Bob',
+//     sayHi(){
+//         console.log(`Hi! I am ${this.name}`);
+//     }
+// }
+
+// function printName(person){
+//     console.log(person?.name); // объект может быть, а может и не быть
+// }
+
+// printName(second);
+// printName(first);
+// // second.sayHi(); // обращение к функции внутри объекта
+
+// first?.sayHi(); // typeScript будет использовать
+// second?.sayHi();
+
+
+// const obj = {name: 'Ирина'};
+// obj.age = 25; // добавляем ключ и его значение
+// console.log(obj);
+
+// const obj = {name: 'Ирина'};
+// Object.preventExtensions(obj); // запрет на расширение объектов // влияет только на нижележащие объекты
+// obj.age = 25; // уже не работает
+// // console.log(obj);
+
+// const obj = {name: 'Ирина'};
+// Object.preventExtensions(obj);
+// obj.name = 25; // изменить значение существующего ключа можно
+// console.log(obj);
+
+
+// const obj = {name: 'Ирина'};
+// Object.freeze(obj); // запрет на измнения в ключах
+// obj.age = 25; // уже не работает
+// obj.name = 'Марина'; // уже не работает
+// console.log(obj);
+
+
+
+
+// КОНТЕКСТ
+
+// let person = {
+//     age:24,
+//     name: 'Irina',
+//     job: 'Programmer',
+//     displayInfo: function(){
+//         console.log('name:', this.name);
+//         console.log('age:', this.age);
+//         console.log('job:', this.job);
+//     }
+// }
+// person.displayInfo();
+
+// let person = {
+//     age: 24,
+//     name: 'Irina',
+//     job: 'Programmer',
+//     displayInfo: function (ms) {
+//         let self = this;
+//         console.log(this);
+//         setTimeout(function() { // создаётся своя область видиости
+//             console.log(this); // является не объектом person, а вообще является объектом window
+//             console.log('name:', this.name);
+//             console.log('age:', this.age);
+//             console.log('job:', this.job);
+//         }, ms);
+
+//     }
+// }
+// // console.log(this);
+
+// person.displayInfo(2000); // задаём через сколько отобразиться информация // информация не отобразиться корректно из-за нарушения областей видиимости, другая область видимости
+
+
+// let person = {
+//     age: 24,
+//     name: 'Irina',
+//     job: 'Programmer',
+//     displayInfo: function (ms) {
+//         let self = this;
+//         setTimeout(function() { // создаётся своя область видиости
+//             console.log(this); // является не объектом person, а вообще является объектом window
+//             console.log('name:', self.name);
+//             console.log('age:', self.age);
+//             console.log('job:', self.job);
+//         }, ms);
+
+//     }
+// }
+
+
+// person.displayInfo(2000);
+
+// ~==
+
+// let person = {
+//     age: 24,
+//     name: 'Irina',
+//     job: 'Programmer',
+//     displayInfo: function (ms) {
+//         setTimeout(function() { // создаётся своя область видиости
+//             console.log(this); // является не объектом person, а вообще является объектом window
+//             console.log('name:', this.name);
+//             console.log('age:', this.age);
+//             console.log('job:', this.job);
+//         }, bind(this), ms);
+
+//     }
+// }
+
+
+// person.displayInfo(2000);
+
+// ~==
+
+// let person = {
+//     age: 24,
+//     name: 'Irina',
+//     job: 'Programmer',
+//     displayInfo: function (ms) {
+//         setTimeout(() => { // создаётся своя область видиости
+//             console.log(this); // является не объектом person, а вообще является объектом window
+//             console.log('name:', this.name);
+//             console.log('age:', this.age);
+//             console.log('job:', this.job);
+//         }, ms);
+
+//     }
+// }
+
+// person.displayInfo(2000);
+
+
+// let h = document.querySelector('h1');
+// h.addEventListener('click', function() { // а вот так не получится
+//     this.style.color = 'red';
+// });
+
+// let h = document.querySelector('h1');
+// h.addEventListener('click', () => { // а вот так не получится // стрелочная функция не имеет контекста объекта // стрелочная функция берёт контекст из родительской функции, у нас здесь такой нет
+//     this.style.color = 'red';
+// });
+
+
+
+
+// BOM (Browser Object Model)
+
+// корневной элемент всегда window, он представляет собой открытое окно браузера, все остальные методы и свойства идут через него
+
+// window.alert('Hello'); // любую команду можно так записать
+// window.document.querySelector('h1').style.color = 'red';
+
+// let modal = document.querySelector('#modal');
+
+// document.querySelector('#btn').addEventListener('click', function () {
+//     modal.style.display = 'block';
+// });
+
+// document.querySelector('.close').addEventListener('click', function () {
+//     modal.style.display = 'none';
+// });
+
+// window.addEventListener('click', function (event) {
+//     if (event.target == modal) { // клик по целевому объекту
+//         modal.style.display = 'none';
+//     }
+// });
+
+// let w = document.documentElement.clientWidth; // documentElement - обращение к тегу HTML
+// let h = document.documentElement.clientHeight;
+
+// document.querySelector('#window').innerHTML = "Ширина окна: " + w + ", высота окна: " + h;
+
+// console.log("Ширина окна", window.innerWidth); // берёт размер открытого содержимого
+// console.log("Ширина окна", window.innerHeight); // берёт размер открытого содержимого
+
+
+// let box = document.querySelector(".box");
+// // let width = box.clientWidth; // накладываются дополнительные css надстройки (border-box, margin, padding)
+// // let height = box.clientHeight;
+// // let width = box.offsetWidth; // исходное окно без учёта доп значений css
+// // let height = box.offsetHeight;
+// // let width = box.scrollWidth; 
+// // let height = box.scrollHeight;
+
+// // console.log(width, height);
+
+// let flag;
+// let hh = box.offsetHeight;
+
+// // document.querySelector('button').addEventListener('click', function(){
+// //     if(!flag){
+// //         box.style.height = box.scrollHeight + 'px';
+// //         flag = 0;
+// //     } else {
+// //         box.style.height = hh + 'px';
+// //     }
+// //     flag = !flag;
+// // });
+
+// document.querySelector('button').addEventListener('click', function(){
+//     // console.log(box.scrollTop);
+//     // console.log(box.getBoundingClientRect());
+//     // console.log(box.getBoundingClientRect().top); // так можно получить любое значение положения элемента
+//     // console.log("offsetTop", box.offsetTop); // на какой границе находится содержимое элемента
+
+//     if(!flag){
+//        box.style.overflow = 'hidden'; 
+//     } else {
+//         box.style.overflow = '';
+//     }
+//     flag = !flag;
+
+// });
+
+
+
+// progress bar
+
+// window.addEventListener('scroll', myFunction);
+
+// function myFunction(){
+//     let winScroll = document.documentElement.scrollTop;
+//     let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+//     let scrolled = winScroll / height * 100;
+
+//     document.querySelector('#myBar').style.width = scrolled + '%';
+
+//     document.querySelector('img').style.transform = 'translate(' + (document.documentElement.clientWidth - 94) * scrolled / 100 + 'px, 0px)';
+// }
+
+// let win = null;
+// let open = document.querySelector("#show");
+// let close = document.querySelector("#close");
+// open.addEventListener('click', function(){
+//     // window.open("https://yandex.com"); // метод window, в котором мы переходим на какую-то страницу
+//     win = window.open("str.html",
+//         "new_window",
+//         "width=420,height=220,left=200,top=200,resizable=yes");
+// });
+// close.addEventListener('click', function(){
+//     if(typeof win == "object"){
+//       win.close();  
+//     }
+// });
+
+
+
+// console.log(window.location);
+// // ==
+// console.log(location);
+
+// console.log(location.href);
+// alert(location);
+
+
+// location.href = "https://career-test.top-academy.ru/"; // жётская переадресация // редирект
+
+// let open = document.querySelector("#show");
+// open.addEventListener("click", function(){
+//     window.location.assign("https://career-test.top-academy.ru/"); // мягкая переадресация, можно вернуться назад
+// });
+
+// let open = document.querySelector("#show");
+// open.addEventListener("click", function(){
+//     window.location.assign("str.html"); // мягкая переадресация, можно вернуться назад
+// });
+
+
+// переход по указанной ссылке
+
+// let btn = document.getElementById("btn");
+// btn.addEventListener("click", () => {
+//     let url = document.getElementById("url").value;
+//     // location.assign(url); // можно по истории назад перемещаться
+//     // location.replace(url); // подхватывает страницы в историю перемещений
+//     location.reload(url); // перезагружает саму страницу
+// });
+
+// console.log("В истории " + history.length + " страниц");
+// history.go(3); // перейти на страницу в истории текущей страницы, а можем указывать минусовые значения, это перемещение назад
+
+
+// console.log(window.navigator); // общая статистика которую можно получить по использованию сайта
+// console.log(window.navigator.userAgent); // узнать браузеры и их версии у пользователя
+// console.log(window.screen); // узнать характеристики монитора (не производитель)
+
+
+// обработка ошибок
+
+// исключения
+// try {
+//     // код, где может произойти ошибка
+// } catch (error){
+//     // блок выполниться, если произошла ошибка
+// } finally { // доп блок, выполняется в любом случае (была ошибка, не было ошибки)
+
+// }
+
+
+// let a = 5;
+// console.log(a);
+// console.log(b);
+// ReferenceError, может обработаться исключениями
+
+
+// console.log("Hello); 
+// // SyntaxError, не обрабатываются
+
+// let a = 5;
+// try {
+//     console.log(b);
+// } catch (error) {
+//     console.error("Ошибка:", error.message); // называется исключительной ситуацией // error - красный консоль лог // программа не прекратила своего выполнения
+// }
+// console.log(a);
+
+// let num = 16;
+// console.log(num());
+// // TypeError
+
+// try{
+//     let num = 16;
+//     console.log(num());
+// } catch (e){
+//     console.log(e.name); // тип ошибки
+//     console.log(e.message); // описание ошибки
+//     console.log(e.stack); // тип, ошибка и в каком документе и строке произошла ошибка
+// }
+
+
+// let arr = new Array(-5);
+// // RangeError
+
+
+// try{
+//     let arr = new Array(-5);
+// } catch (err){
+//     let text = err.name + "<br>" + err.message + "<br>" + err.stack;
+//     document.getElementById("demo").innerHTML = text;
+// }
+
+
+
+// с таймаутом не получается поймать ошибку из-за задержки по времени, трайкэтч должен быть внутри таймаута
+// try {
+//     setTimeout(function () {
+//         alert(x);
+//         alert(2 + 2);
+//     }, 10)
+// } catch (e) {
+//     alert(e.name + ": " + e.message);
+// }
+
+
+
+// setTimeout(function () {
+//     try {
+//         alert(x);
+//         alert(2 + 2); // всё равно не выведется
+//     } catch (e) {
+//         alert(e.name + ": " + e.message);
+//     } 
+// }, 10)
+
+// try {
+//     alert(x);
+//     alert(2 + 2); // всё равно не выведется
+// } catch (e) {
+//     alert(e.name + ": " + e.message);
+// } finally {
+//     alert("Код в блоке finally");
+// }
+
+
+// let flag = false;
+// let but = document.querySelector("button");
+
+// but.addEventListener("click", function(){
+//     try{
+//         if(!flag){
+//             document.body.style.background = "yellow";
+//         } else {
+//             document.body.style.background = "greenyellow";
+//         }
+//     } catch (e) {
+//         alert(e);
+//     } finally {
+//         flag = !flag;
+//     }
+// });
+
+// throw new Error(""); // делаем свои исключения
+
+// function divide(a, b){
+//     if(b == 0){
+//         throw new Error("Делить на ноль нельзя"); // throw прерывает выполнение нашей функции // catch берёт эту ошибку
+//     }
+//     return a / b;
+// }
+
+// let res;
+// try{
+//     res = divide(5, 0);
+//     console.log(res);
+// } catch (error) {
+//     console.log(error.name + ": " + error.message + ", stack: " + error.stack);
+// }
+
+// let btn = document.querySelector("button");
+// btn.addEventListener("click", myFunction);
+
+// function myFunction() {
+//     let message = document.getElementById("txt");
+//     let x = document.getElementById("demo").value;
+//     message.innerHTML = "";
+//     try {
+//         if (x == ""){
+//             throw "пусто"; // выбрасывается исключение
+//         } if(isNaN(x)){
+//             throw "не число";
+//         }
+
+//         if(x < 5){
+//             throw "слишком маленькое число";
+//         }
+//         if(x > 10){
+//             throw "слишком большое число";
+//         }
+
+//     } catch (err) {
+//         message.innerHTML = "Вы ввели " + err;
+//     }
+// }
+
+// function calculate (a, b){
+//     if(typeof a != "number"){
+//         throw "a - не число"; // может работать независимым элементом без try catch // но если мы так используем, то не увидим вторую ошибку, идущую после
+//     }
+//     return a + (b ** 2) / 3;
+// }
+
+// console.log(calculate(5, 3));
+// console.log(calculate("Hello", 3));
+
+
+
+// КЛАССЫ
+// по типу данных являются функциями
+
+// функция-конструктор -- старый подход
+// function Person(name, age) {
+//     this.name = name;
+//     this.age = age;
+// }
+
+// const person1 = new Person("Андрей", 23);
+// console.log(person1);
+
+// ==
+
+// новый подход
+// class Person2 {
+//     constructor(name, age) { // служебный метод
+//         this.name = name;
+//         this.age = age;
+//     }
+
+//     sayHi(){
+//         document.writeln("Привет, " + this.name + "!")
+//     }
+// }
+
+// const person2 = new Person2("Андрей", 23);
+// console.log(person2);
+// person2.sayHi();
+// alert(typeof Person2); // function
+
+// == можно иначе создать
+
+// let User = class { // по аналогии с function expression, но только с заглавной
+//     sayHi(){
+//         alert("Привет");
+//     }
+// }
+
+// let user = new User();
+// user.sayHi();
+// alert(MyClass); // за пределами нельзя обращаться к классу по внутреннему имени (пишется после класс)
+
+// function makeClass(text){
+//     return class {
+//         sayHi(){
+//         alert(text);
+//     }
+//     }
+// }
+
+// let User = makeClass("Наш текст для функции, в которой создаётся класс");
+// new User().sayHi(); // так обращаемся к такой функции внутри // редко используется
+
+// class Rectangle {
+//     constructor(height, width){
+//         this.height = height;
+//         this.width = width;
+//     }
+
+//     area(){
+//         return this.height * this.width;
+//     }
+// }
+
+// // создаём объект для класса
+// const rectangle = new Rectangle(10, 20);
+// console.log(rectangle.area());
+
+// // rectangle.hello(){ // нельзя создавать методы за пределами функции
+// //     console.log("Hello");
+// // }
+
+
+
+
+
+
+
+
+
+
+
+// ВСТАВИТЬ ЗАНЯТИЕ 28.07
+
+
+
+
+
+
+
+
+
+
+// class Shape {
+//   constructor(name) {
+//     this.name = name;
+//   }
+
+//   calculateArea() {
+//     throw new Error("Метод calculateArea должен быть реализован");
+//   }
+
+//   describe() {
+//     console.log(`Это ${this.name} площадью ${this.calculateArea()}`);
+//   }
+// }
+
+// class Circle extends Shape { // наследник, их может быть много
+//   constructor(name, radius) {
+//     super(name);
+//     this.radius = radius;
+//   }
+
+//   calculateArea() {
+//     return (Math.PI * this.radius ** 2).toFixed(2);
+//   }
+// }
+
+// class Square extends Shape {
+//     constructor(name, side){
+//         super(name); // вызываем конструктор родительского класса
+//         this.side = side;
+//     }
+
+//     calculateArea(){
+//        return this.side ** 2;
+//     }
+// }
+
+// class Triangle extends Shape {
+//     constructor(name, base, height) {
+//         super(name);
+//         this.base = base;
+//         this.height = height;
+//     }
+
+//     calculateArea(){
+//         return this.base * this.height / 2;
+//     }
+// }
+
+// // const circle = new Circle("Круг", 5);
+// // circle.describe();
+
+// // const square = new Square("Круг", 5);
+// // square.describe();
+
+// // const triangle = new Triangle("Треугольник", 6, 3);
+// // triangle.describe();
+
+// // ==  полиморфизм
+
+// const shapes = [
+//     new Circle("Круг", 5),
+//     new Square("Круг", 5),
+//     new Triangle("Треугольник", 6, 3)
+// ]
+
+// shapes.forEach(shape => shape.describe());
+
+
+
+// class Animal{
+//     static count = 0; // статическое свойство чаще всего объявяляется перед конструктором // обращение к нему через имя класса
+
+//     constructor(name){
+//         this.speed = 0; // this - динамическое свойство
+//         this.name = name;
+//         Animal.count++; // будет показывать сколько экземпляров класса было создано let animal1 = new Animal("Мой питомец 1");
+//     }
+
+//     static counter(){
+//         return Animal.count;
+//     }
+
+//     run(speed){
+//         this.speed = speed;
+//         document.writeln(`${this.name} бежить со скоростью ${this.speed} км/ч.<br>`);        
+//     }
+
+//     stop(){
+//         this.speed = 0;
+//         document.writeln(`${this.name} стоит.<br>`);``        
+//     }
+// }
+
+// let animal1 = new Animal("Мой питомец 1");
+// let animal2 = new Animal("Мой питомец 2"); // this - динамическое свойство, может меняться
+// let animal3 = new Animal("Мой питомец 3");
+
+// // console.log(animal1.name);
+// // console.log(animal2.name);
+
+// // console.log(Animal.name); // статическое свойство, так как получаем всегда название класса
+// // console.log(Animal.count); // статическое свойство задано через static
+// // console.log(animal1.count); // undefined, статическое свойство мы получаем только через имя класса, а через экземпляры нельзя
+
+// console.log(Animal.counter());
+
+
+
+// class User{
+//     static takenNames = [];
+
+//     static isNameTaken(name){
+//         return User.takenNames.includes(name); // существует ли в takenNames имя, которое мы будем передавать
+//     }
+
+//     constructor(name){
+//         this.name = name;
+//         User.takenNames.push(name);
+//     }
+// }
+
+// const user1 = new User("Сергей");
+// const user2 = new User("Марина");
+
+// console.log(User.takenNames);
+// console.log(User.isNameTaken("Сергей")); // true
+// console.log(User.isNameTaken("Николай")); // false
+
+// // в статических свойствах мы можем привязываться к любому количеству созданных экземпляров
+
+
+
+
+
+// class MathUtils {
+//     static PI = 3.141592653589793;
+
+//     static sum(...number) { // ...num - любое количество чисел
+//         return number.reduce((total, num) => total + num, 0); // 0 делается на случай, если не передали значения в метод
+//         /* Принцип работы reduce
+//         let total = 0;
+//         let num = [1, 2, 3, 4] 
+//         0 + 1
+//         1 + 2
+//         3 + 3
+//         6 + 4
+//         total = 10
+//         */
+//     }
+
+//     static average(...number){
+//         return MathUtils.sum(...number) / number.length;
+//     }
+
+// }
+
+// console.log(MathUtils.PI);
+// console.log(MathUtils.sum(1, 2, 3, 4));
+// console.log(MathUtils.average(1, 2, 3, 4));
+
+
+// class Task{
+//     constructor(title = Task.getDefaultTitle()){ // вместо undefined при отсуствии данных будет выводиться дефолтное сообщение в консоли, задано в соотвествующей фукнции
+//         this.title = title;
+//         this.done = false;
+//         Task.count++;
+//         // console.log("Происходит создание задачи...");
+//     }
+
+//     static getDefaultTitle(){
+//         return "Задача";
+//     }
+
+//     get done(){ 
+//         return this._done === true ? "Задача выполнена" : "Задача не выполнена"; 
+//     }
+
+//     set done(value){ // сеттер, чтобы нельзя было никаким образом изменить тип данных boolean
+//         if(value !== undefined && typeof value == 'boolean'){
+//             this._done = value;
+//         } else {
+//             console.error("Ошибка! Укажите значение либо true, либо false!")
+//         }
+//     }
+
+//     complete(){
+//         this.done = true;
+//         console.log(`Задача "${this.title}" выполнена`);
+//     }
+// }
+
+// Task.count = 0;
+
+// let task1 = new Task("Выучить JavaScript");
+// let task2 = new Task("Выучить frameworks");
+// let task3 = new Task();
+
+// console.log(task1.title);
+// console.log(task2.title);
+// console.log(task3.title);
+
+// console.log("Созданных задач: " + Task.count)
+
+// task2.complete();
+
+// console.log(task1.done);
+// console.log(task2.done);
+
+
+// class Header {
+//     constructor(image, h1, h2){
+//         this.src = image;
+//         this.h1 = h1;
+//         this.h2 = h2;
+//         this.out = ""; // делаем так, чтобы можно было видеть в дочерних классах переменную
+//     }
+
+//     render(id){
+//         this.out = `
+//             <img src="${this.src}" alt="Изображение">
+//             <h1>${this.h1}</h1>
+//             <h2>${this.h2}</h2>
+//         `;
+//         document.querySelector(`#${id}`).innerHTML = this.out;
+//     }
+// }
+
+// class HeaderExt extends Header {
+//     constructor(image, h1, h2, tel){
+//         super(image, h1, h2);
+//         this.tel = tel;
+//     }
+
+//     get tel(){
+//         return this._tel;
+//     }
+
+//     set tel(value){
+//         let reg = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
+//         if(reg.test(value)){
+//             this._tel = value;
+//         } else {
+//             alert("Неккорретный номер телефона");
+//         }
+//     }
+
+//     render(id){
+//         super.render(id);
+
+//         this.out += `<h3>${this.tel}</h3>`;
+//         document.querySelector(`#${id}`).innerHTML = this.out;
+//     }
+// }
+
+// let img = "https://kem.top-academy.ru/_images/BQ3NneHecFmeiFtj6KNEnC17pD0=/images/3330bd4e-5c2e-46ec-945d-bdd426f023b1_dizain-interera-1.png";
+// let header1 = new Header(img, "Заголовок", "Описание");
+// header1.render("header");
+
+
+// let img2 = "https://kem.top-academy.ru/_images/WaJ942JgxTgWloyXAzPDls5gqy8=/images/493513e3-21b1-44e0-81f1-7c2fe051a8a5_courses-icon41-1.png";
+// let header2 = new Header(img2, "Второй заголовок", "Другое описание");
+// header2.render("header2");
+
+// let img3 = "https://kem.top-academy.ru/_images/g_mPSzI-Ihe-vj9IZTkbw1FJh_w=/images/209a94ce-7c83-41ff-a8d0-50733f79d863_back-end-razrabotka.png";
+// let header3 = new HeaderExt(img3, "Название", "Описание", "7 555 555-123-45");
+
+// header3.tel = "Hello";
+// // header3.tel = "+7 930 788-43-12";
+
+// header3.render("header-ext");
+
+
+
+
+// РАБОТА С CANVAS
+
+const canvas = document.getElementById("test");
+const c = canvas.getContext("2d"); // задаём пространство для работы в 2д или 3д
+
+// c.fillStyle = "#369"; // цвет должен быть указан выше фигуры
+// c.fillRect(10, 10, 60, 50);
+
+// c.fillStyle = "#f60";
+// c.fillRect(40, 50, 100, 90); // сама фигура
+
+// c.setLineDash([15, 5]); // пунктирный контур, массив, кол-во линий и их длина
+// c.lineWidth = 4.5; // контур
+// c.strokeStyle = "#369";
+// c.strokeRect(5, 5, 140, 140);
+
+// c.clearRect(30, 30, 50, 50); // вырезать фигуру
+
+// c.fillStyle = "#000";
+// c.fillRect(20, 20, 160, 160);
+
+// c.clearRect(50,  50, 100, 100);
+
+// c.lineWidth = 4.5;
+// c.strokeStyle = "#666";
+// c.strokeRect(60, 60, 80, 80);
+
+// c.beginPath(); // указыает начало пути 
+// c.rect(30, 180, 100, 90); // тоже рисует прямоугольник
+// c.closePath(); // указыает конец пути фигуры
+
+// c.fillStyle = "yellow";
+// c.strokeStyle = "brown"; // должен быть выше чем декларация самого контура
+// c.fill(); // заливка прямоугольника выше
+// c.stroke(); // контур
+
+// c.clip(); // наложить следующую фигуру на предыдущую, то есть верхняя фигура маска
+
+// c.beginPath();
+// c.rect(10, 200, 140, 90);
+// c.closePath();
+// c.stroke();
+
+
+// c.beginPath(); // помогают замыкать фигуры
+
+// c.moveTo(80, 50); // координаты начала рисования
+// c.lineTo(100, 80); // координаты конечной точки рисования
+// c.lineTo(100, 30); // делает треугольник
+
+// c.closePath();
+// c.strokeStyle = "brown";
+// c.stroke();
+// c.fillStroke = "yellow";
+// c.fill();
+
+
+// c.beginPath();
+// c.arc(200, 80, 40, 0, Math.PI * 2); // окружность 40 - радиус, 0 и пи - начальный и конечный точки усечения
+// c.stroke();
+// c.closePath();
+
+// c.beginPath();
+// c.moveTo(300, 80);
+// c.arc(300, 80, 40, 0, Math.PI / 2, true); // true - развернуть в другую сторону
+// c.closePath();
+// c.stroke();
+
+// c.beginPath();
+// c.moveTo(310, 90);
+// c.arc(310, 90, 40, 0, Math.PI / 2, false);
+// c.closePath();
+// c.stroke();
+
+// c.beginPath();
+// c.moveTo(410, 90);
+// c.arc(410, 90, 40, 0, Math.PI, false);
+// c.closePath();
+// c.stroke();
+
+// c.beginPath();
+// c.moveTo(180, 220);
+// c.quadraticCurveTo(230, 160, 290, 220);
+// c.closePath();
+// c.strokeStyle = "red";
+// c.stroke();
+
+// c.beginPath();
+// c.moveTo(180, 260);
+// c.bezierCurveTo(240, 200, 220, 320, 290, 260);
+// c.closePath();
+// c.strokeStyle = "red";
+// c.stroke();
+
+// c.fillStyle = "blue";
+// c.font = "30px Arial";
+// c.fillText("Hello World", 160, 30);
+// c.strokeText("Hello World", 320, 30);
+
+// c.font = "30px Verdana";
+// c.fillStyle = "orange";
+// c.textAlign = "center";
+
+
+// c.shadowOffsetX = 3; // тень, полож вправо, отриц влево
+// c.shadowOffsetY = 3;
+// c.shadowBlur = 3; // размытие
+// c.shadowColor = "#AAA";
+
+// c.fillText("Hello World", canvas.width / 2, canvas.height / 2); // вот так выровняет по центру
+
+
+// let pic = new Image();
+// pic.src = "https://kem.top-academy.ru/_images/g_mPSzI-Ihe-vj9IZTkbw1FJh_w=/images/209a94ce-7c83-41ff-a8d0-50733f79d863_back-end-razrabotka.png";
+// pic.addEventListener("load", function(){
+//     c.drawImage(pic, 10, 10, 100, 100);
+
+//     c.drawImage(pic, 20, 0, 300, 130)
+// })
+
+// let gr = c.createLinearGradient(320, 0, 470, 0);
+// gr.addColorStop(0, "red");
+// gr.addColorStop(0.4, "magenta")
+// gr.addColorStop(1, "yellow")
+
+// c.fillStyle = gr;
+// c.fillRect(320, 170, 150, 60);
+
+// let st = c.createLinearGradient(320, 0, 470, 0);
+// st.addColorStop(0, "yellow");
+// st.addColorStop(1, "orange");
+// c.strokeStyle = st;
+// c.lineWidth = 10;
+// c.strokeRect(320, 170, 150, 60);
+
+// let grd = c.createRadialGradient(400, 270, 5, 400, 270, 60);
+// grd.addColorStop(0, "red");
+// grd.addColorStop(1, "yellow");
+// c.fillStyle = grd;
+// c.fillRect(320, 240, 150, 60);
+
+// c.shadowOffsetX = 10;
+// c.shadowOffsetY = 15;
+// c.shadowBlur = 10;
+// c.shadowColor = "#0F0"
+
+// let gr = c.createRadialGradient(60, 60, 15, 75, 75, 75);
+// gr.addColorStop(0, "#0F0");
+// gr.addColorStop(1, "#0DA805");
+// c.fillStyle = gr;
+// c.beginPath();
+// c.arc(75, 75, 75, 0, Math.PI * 2);
+
+// c.fillStyle = gr;
+// c.beginPath();
+// c.arc(75, 75, 75, 0, Math.PI * 2);
+// c.closePath();
+// c.fill();
+
+
+
+// c.fillStyle = "brown";
+// c.fillRect(50, 50, 100, 100);
+
+// c.fillStyle = "orange";
+// c.globalAlpha = 0.5; // прозрачность. все эти свойства влияют на фигуры создаваемые ниже
+// // c.translate(50, 25);
+// // c.rotate(.52); // поворот на 30 грудусов
+// c.scale(1.5, 1.5);
+// c.fillRect(50, 50, 100, 100);
+
+
+// РИСОВАЛКА В КАНВАС
+
+const w = canvas.width;
+const h = canvas.height;
+
+const mouse = { x: 0, y: 0 };
+let draw = false;
+
+
+// нажатие мыши
+canvas.addEventListener("mousedown", function (e) {
+    mouse.x = e.pageX - this.offsetLeft;
+    mouse.y = e.pageY - this.offsetTop;
+    draw = true;
+    c.beginPath();
+    c.moveTo(mouse.x, mouse.y);
+
+});
+
+// перемещение мыши
+canvas.addEventListener("mousemove", function (e) {
+    if (draw) { // draw == true
+        mouse.x = e.pageX - this.offsetLeft;
+        mouse.y = e.pageY - this.offsetTop;
+        c.lineTo(mouse.x, mouse.y);
+        c.stroke();
+    }
+});
+
+// отпускаем мышь
+canvas.addEventListener("mouseup", function (e) {
+    mouse.x = e.pageX - this.offsetLeft;
+    mouse.y = e.pageY - this.offsetTop;
+    c.lineTo(mouse.x, mouse.y);
+    c.stroke();
+
+    c.closePath();
+    draw = false;
+});
