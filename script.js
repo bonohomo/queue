@@ -5025,7 +5025,7 @@ $ - конец строки (после последовательности н�
 
 // Для создания нового репозитория
 // git init
-// git add .
+// git add . // == git add -A
 // git commit -m "change"
 // git remote add origin https://github.com/Helen-prog/qqq.git
 // git push -u origin master
