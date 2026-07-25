@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* ==================== HEADINGS ==================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a0a3a 0%, #2d1b4e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* ==================== SCREEN 1: INTRO ==================== */
+        .screen {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .intro-screen {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .intro-screen h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .intro-screen .subtitle {
+            font-size: 16px;
+            color: #b0a5d9;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .intro-screen .description {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #d4d4d4;
+            text-align: left;
+        }
+
+        .intro-screen .description p {
+            margin-bottom: 15px;
+        }
+
+        .intro-screen .description p:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(124, 58, 237, 0.4);
+        }
+
+        .small-p {
+            font-size: 12px;
+        }
+
+        /* ==================== SCREEN 2: QUIZ ==================== */
+        .quiz-screen {
+            padding: 40px;
+        }
+
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .progress-btn {
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px;
+            font-weight: 600;
+            cursor: not-allowed;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .progress-btn.completed {
+            background: rgba(124, 58, 237, 0.5);
+            border-color: #7c3aed;
+            color: white;
+        }
+
+        .progress-btn.current {
+            background: #7c3aed;
+            border-color: #7c3aed;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.6);
+        }
+
+        .question-block {
+            margin-bottom: 40px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .likert-scale {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .answer-btn {
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .answer-btn:hover {
+            border-color: #7c3aed;
+            color: #7c3aed;
+            transform: scale(1.1);
+        }
+
+        .answer-btn.active {
+            background: #7c3aed;
+            border-color: #7c3aed;
+            color: white;
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+        }
+
+        .likert-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #b0a5d9;
+            margin-top: 15px;
+        }
+
+        /* ==================== INPUT FIELDS FOR CONTACT DATA ==================== */
+        .input-field {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .input-field input {
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .input-field input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-field input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            border-color: #7c3aed;
+            color: #7c3aed;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .question-counter {
+            text-align: center;
+            font-size: 14px;
+            color: #b0a5d9;
+            min-width: 80px;
+        }
+
+        /* ==================== SCREEN 3: RESULTS ==================== */
+        .results-screen {
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .results-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #7c3aed;
+            line-height: 1.8;
+        }
+
+        .result-card.validation {
+            margin-top: 20px;
+            background: rgba(255, 193, 7, 0.1);
+            border-left-color: #ffc107;
+        }
+
+        .result-card h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7c3aed;
+        }
+
+        .result-card h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7c3aed;
+        }
+
+        .result-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7c3aed;
+        }
+
+        .result-card a {
+            text-decoration: underline;
+            color: #7c3aed;
+        }
+
+        .result-card.validation h3 {
+            color: #ffc107;
+        }
+
+        .result-skills h3 {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .result-card p {
+            font-size: 14px;
+            color: #d4d4d4;
+            margin-bottom: 10px;
+        }
+
+        .result-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .score-item {
+            background: rgba(124, 58, 237, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+        }
+
+        .score-label {
+            font-size: 11px;
+            color: #b0a5d9;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 600;
+            word-break: break-word;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            line-height: 1.2;
+            font-size: 11px;
+            padding: 4px;
+        }
+
+        .score-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #7c3aed;
+        }
+
+        .btn-restart {
+            display: inline-block;
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(124, 58, 237, 0.4);
+        }
+
+        .loading-message {
+            text-align: center;
+            font-size: 16px;
+            color: #b0a5d9;
+            margin-top: 20px;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .quiz-screen {
+                padding: 20px;
+            }
+
+            .progress-bar {
+                margin-bottom: 30px;
+            }
+
+            .progress-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 9px;
+            }
+
+            .question-text {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .answer-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 14px;
+            }
+
+            .likert-scale {
+                gap: 8px;
+            }
+
+            .input-field input {
+                max-width: 100%;
+            }
+
+            .scores-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
+
+            .intro-screen {
+                padding: 40px 20px;
+            }
+
+            .intro-screen h1 {
+                font-size: 24px;
+            }
+
+            .results-screen {
+                padding: 20px;
+            }
+
+            .results-title {
+                font-size: 24px;
+            }
+
+            .score-item::after {
+                width: 20px;
+                height: 20px;
+                font-size: 13px;
+                transform: translate(30%, -30%);
+            }
+        }
+
+        /* ПОПАПЫ НА КОМПЕТЕНЦИЯХ */
+
+        .system-card {
+            position: relative;
+            max-width: 720px;
+            padding: 40px 42px;
+            border-radius: 24px;
+            background: #1a0b3a;
+            color: #ffffff;
+            font-family: sans-serif;
+            box-shadow: 0px 40px 80px 0px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Эмодзи через ::before */
+        .system-card::before {
+            content: var(--emoji, "⚙️");
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 40px;
+        }
+
+        /* Кнопка закрытия */
+        .system-card__close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 20px;
+            height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .system-card__close::before,
+        .system-card__close::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 25px;
+            height: 4px;
+            background: #cfc6e6;
+        }
+
+        .system-card__close::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .system-card__close::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        /* Заголовок */
+        .system-card__title {
+            margin: 0 0 20px;
+            color: rgba(255, 255, 255, 1);
+            font-family: 'Segoe UI';
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 26px;
+            letter-spacing: 0px;
+        }
+
+        /* Линия */
+        .system-card__divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        /* Текст */
+        .system-card__text {
+            margin: 0 0 22px;
+            line-height: 1.6;
+            color: rgba(216, 213, 240, 1);
+            font-family: 'Segoe UI';
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 18px;
+            letter-spacing: 0px;
+        }
+
+        .score-item {
+            position: relative;
+            padding-top: 20px;
+            /* даём место под плюс */
+        }
+
+        /* ПЛЮС */
+        .score-item::after {
+            content: "+";
+            position: absolute;
+
+            top: 8px;
+            /* фиксированная позиция */
+            right: 8px;
+
+            width: 22px;
+            height: 22px;
+
+            border-radius: 50%;
+            background: rgba(124, 58, 237, 0.95);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+
+            z-index: 2;
+        }
+
+        .score-item:hover::after {
+            transform: translate(40%, -40%) scale(1.1);
+            background: #7c3aed;
+        }
+
+        .score-item:active::after {
+            transform: translate(40%, -40%) scale(0.9);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, .15);
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #7c3aed;
+            margin: 24px 0 12px;
+        }
+    </style>
+</head>
+
+<body>
+     <div class="result-card">
+                    <h3>&#x2728; Ваш тип: ${PROFILES[result.leader].name}</h3>
+                    <p>${PROFILES[result.leader].desc}</p>
+                </div>
+
+                <div class="result-card">
+                    <h3>&#x1F525; Дополнительный профиль: ${PROFILES[result.vice].name}</h3>
+                    <p>${PROFILES[result.vice].desc}</p>
+                </div>
+
+                <div class="result-card">
+                    <h3>&#x1F4A1; Ваша стратегия: ${ANCHORS[result.anchor].name}</h3>
+                    <p>${ANCHORS[result.anchor].advice}</p>
+                </div>
+
+                <div class="result-card">
+                    <h3>&#x1F680; Рекомендуемые направления</h3>
+                    <p>1. ${dirs.dir1}</p>
+                    <p>2. ${dirs.dir2}</p>
+                </div>
+
+                ${result.experienceLevel && EXPERIENCE_INSIGHTS[result.experienceLevel] ? `
+                <div class="result-card">
+                    <h3>&#x1F9ED; Ваш вектор по уровню опыта</h3>
+                    <p>${EXPERIENCE_INSIGHTS[result.experienceLevel]}</p>
+                </div>` : ''}
+
+                ${result.activityCluster && ACTIVITY_INSIGHTS[result.activityCluster] ? `
+                <div class="result-card">
+                    <h3>&#x1F9F1; Ваш фундамент: ${ACTIVITY_INSIGHTS[result.activityCluster].title}</h3>
+                    <p>${ACTIVITY_INSIGHTS[result.activityCluster].text}</p>
+                    <p><strong>Обоснование:</strong> ${ACTIVITY_INSIGHTS[result.activityCluster].reason}</p>
+                </div>` : ''}
+
+                <div class="result-skills">
+                    <h3>&#x1F4CA; Ваши компетенции</h3>
+                    </div>
+
+                <div class="scores-grid">
+                    ${['R', 'P', 'I', 'A', 'S', 'E', 'C'].map((key, idx) => {
+                const labels = ['Системное мышление', 'Практический подход', 'Исследователь', 'Творческий подход', 'Коммуникатор', 'Организатор', 'Структурность'];
+                return `<div class="score-item" onclick="openScorePopup('${key}')" style="cursor:pointer;"><div class="score-label">${labels[idx]}</div><div class="score-value">${result.scores[key]}</div></div>`;
+            }).join('')}
+                </div>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 document.querySelectorAll('.styles_list__qUhRr h6').forEach(elem => {console.log(elem.textContent)});
 
-// ПОЛУЧИТЬ СПИСОК СО ВСЕХ СТРАНИЦ СРАЗУ
+// ПОЛУЧИТЬ СПИСОК ПАР РУБРИК СО ВСЕХ СТРАНИЦ ПАГИНАЦИИ СРАЗУ
 
 (async () => {
 

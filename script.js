@@ -4916,16 +4916,168 @@ $ - конец строки (после последовательности н�
 // git pull - забрать измения с удалённого репозитория в локальный репозиторий
 
 
+// https://git-scm.com/
+
+// git
+// github
+
+// git init
+// - инициализация репозитория
+
+// git status
+// - состояние репозитория
+
+// git add -A
+// 		--all
+// 		script.js
+// 		.
+
+// git config --global user.name "new user"
+// 		   --local
+
+// git config --global user.name
+
+// git config --global user.email "test@mail.ru"
+
+// git config --global user.email
+
+// git commit -m "first commit"
+
+// .gitignore
+
+// git add .
+// git commit -m "added gitignore"
+
+// git branch
+// - просмотр веток
+
+// git branch test
+// - создание ветки
+
+// git branch -D test
+
+
+// git branch readme
+
+
+// git checkout readme
+// - перейти на ветку
+
+// readme.md
+
+// git add .
+// git commit -m "created file readme.md"
+
+// git checkout master
+
+// master        ->   readme
+// - script.js	        - script.js
+// - index.html        - index.html
+// - style.css		    - style.css	
+// - readme.md			- readme.md
+
+// git merge readme
+// - слияние веток
+
+// git branch -D readme
+
+// git log
+// - история коммитов
+
+// Settings -> Developer Settings -> Personal access tokens -> Tokens (classic) -> Generate new token (classic)
+
+
+// Generate token
+
+// Win + R => control
+
+// Диспечер учетных данных
+
+
+// https://github.com
+// Helen-prog
+// токен
+
+
+// git push -u origin master
+
+// 0) git status
+// 1) git add .
+// 2) git commit -m "change"
+// 3) git push
+
+
+
+// 2bc0a4162bc9a39efcc6d96ad4809d0b01b457f1
+
+// git clone https://github.com/Helen-prog/Frontend512.git
+// - клонирование репозитория
+
+// git pull
+// - забрать изменения из локального репозитория в локальный
+
+
+// let mas = [1, 2]; 
+// console.log(mas[0]);  // 1
+
+// let obj = {one: 1, two: 2};
+// console.log(obj["one"]);  // 1
+
+// Для создания нового репозитория
+// git init
+// git add .
+// git commit -m "change"
+// git remote add origin https://github.com/Helen-prog/qqq.git
+// git push -u origin master
 
 
 
 
 
 
+let registrationForm = document.getElementById("registrationForm");
+let errorMessages = document.getElementById("errorMessages");
 
 
+registrationForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    console.log(registrationForm.elements);
 
+    let [username, email, password] = registrationForm.elements; // деструктуризация, чтобы можно было удобнее обратиться к каждому элементу
+    console.log(username, email, password);
 
+    errorMessages.innerHTML = "";
+
+    if (!username.value.trim()) { // убираем пробелы и смотрим, есть ли текстовый контент
+        displayError("Имя пользователя обязательно");
+        return; // отменяем отправку данных из формы
+    }
+
+    if (!email.value.trim() || !isValidEmail(email.value)) {
+        displayError("Введите адрес электронной почты");
+        return;
+    }
+
+    if (!password.value.trim() || !isStrongPassword(password)) {
+        displayError("Пароль должен состоять из минимум 8ми символов и как минимум одну заглавную букву, одну строчную букву, одну цифру и специальный символ");
+        return;
+    }
+
+    alert("Register successfull!");
+    registrationForm.reset(); // встроенная функция для очистки полей формы
+});
+
+function displayError(message) {
+    errorMessages.innerHTML += `<div class='error'>${message}</div>`;
+}
+
+function isValidEmail (email) {
+    return /^[\w.%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email);
+}
+
+function isStrongPassword (password) {
+    return /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*]).{8,}$/.test(password); // (?=.*\d) - есть хотя бы одна цифра
+}
 
 
 
@@ -5018,7 +5170,7 @@ $ - конец строки (после последовательности н�
 //         if(win){
 //             return true;
 //         }
-//     } 
+//     }
 
 //     return false;
 // }
@@ -5141,7 +5293,7 @@ $ - конец строки (после последовательности н�
 
 // // деструктуризация объекта
 
-// // let {login: {firstName: f, lastName: l}, psw, role} = user; // : f - псевдоним, можно будет обращаться к ключу по нему 
+// // let {login: {firstName: f, lastName: l}, psw, role} = user; // : f - псевдоним, можно будет обращаться к ключу по нему
 // // document.writeln(f + " " + l + " " + psw + " " + role);
 
 // let { login: { firstName: f, lastName: l }, ...rest } = user; // ...rest - придуманная перемнная, которая остальные включает, создаёт новый объект
@@ -5161,7 +5313,7 @@ $ - конец строки (после последовательности н�
 
 // Car.prototype.getAge = function(){ // prototype - наследие от общего класса object // getAge наш метод
 //     return new Date().getFullYear() - this.year; // мы имеем доступ к функциям конструктора
-// } 
+// }
 
 // Car.prototype.color = "black";
 
@@ -5604,7 +5756,7 @@ $ - конец строки (после последовательности н�
 // // let height = box.clientHeight;
 // // let width = box.offsetWidth; // исходное окно без учёта доп значений css
 // // let height = box.offsetHeight;
-// // let width = box.scrollWidth; 
+// // let width = box.scrollWidth;
 // // let height = box.scrollHeight;
 
 // // console.log(width, height);
@@ -5629,7 +5781,7 @@ $ - конец строки (после последовательности н�
 //     // console.log("offsetTop", box.offsetTop); // на какой границе находится содержимое элемента
 
 //     if(!flag){
-//        box.style.overflow = 'hidden'; 
+//        box.style.overflow = 'hidden';
 //     } else {
 //         box.style.overflow = '';
 //     }
@@ -5665,7 +5817,7 @@ $ - конец строки (после последовательности н�
 // });
 // close.addEventListener('click', function(){
 //     if(typeof win == "object"){
-//       win.close();  
+//       win.close();
 //     }
 // });
 
@@ -5729,7 +5881,7 @@ $ - конец строки (после последовательности н�
 // ReferenceError, может обработаться исключениями
 
 
-// console.log("Hello); 
+// console.log("Hello);
 // // SyntaxError, не обрабатываются
 
 // let a = 5;
@@ -5785,7 +5937,7 @@ $ - конец строки (после последовательности н�
 //         alert(2 + 2); // всё равно не выведется
 //     } catch (e) {
 //         alert(e.name + ": " + e.message);
-//     } 
+//     }
 // }, 10)
 
 // try {
@@ -6048,12 +6200,12 @@ $ - конец строки (после последовательности н�
 
 //     run(speed){
 //         this.speed = speed;
-//         document.writeln(`${this.name} бежить со скоростью ${this.speed} км/ч.<br>`);        
+//         document.writeln(`${this.name} бежить со скоростью ${this.speed} км/ч.<br>`);
 //     }
 
 //     stop(){
 //         this.speed = 0;
-//         document.writeln(`${this.name} стоит.<br>`);``        
+//         document.writeln(`${this.name} стоит.<br>`);``
 //     }
 // }
 
@@ -6105,7 +6257,7 @@ $ - конец строки (после последовательности н�
 //         return number.reduce((total, num) => total + num, 0); // 0 делается на случай, если не передали значения в метод
 //         /* Принцип работы reduce
 //         let total = 0;
-//         let num = [1, 2, 3, 4] 
+//         let num = [1, 2, 3, 4]
 //         0 + 1
 //         1 + 2
 //         3 + 3
@@ -6137,8 +6289,8 @@ $ - конец строки (после последовательности н�
 //         return "Задача";
 //     }
 
-//     get done(){ 
-//         return this._done === true ? "Задача выполнена" : "Задача не выполнена"; 
+//     get done(){
+//         return this._done === true ? "Задача выполнена" : "Задача не выполнена";
 //     }
 
 //     set done(value){ // сеттер, чтобы нельзя было никаким образом изменить тип данных boolean
@@ -6240,8 +6392,8 @@ $ - конец строки (после последовательности н�
 
 // РАБОТА С CANVAS
 
-const canvas = document.getElementById("test");
-const c = canvas.getContext("2d"); // задаём пространство для работы в 2д или 3д
+// const canvas = document.getElementById("test");
+// const c = canvas.getContext("2d"); // задаём пространство для работы в 2д или 3д
 
 // c.fillStyle = "#369"; // цвет должен быть указан выше фигуры
 // c.fillRect(10, 10, 60, 50);
@@ -6265,7 +6417,7 @@ const c = canvas.getContext("2d"); // задаём пространство дл
 // c.strokeStyle = "#666";
 // c.strokeRect(60, 60, 80, 80);
 
-// c.beginPath(); // указыает начало пути 
+// c.beginPath(); // указыает начало пути
 // c.rect(30, 180, 100, 90); // тоже рисует прямоугольник
 // c.closePath(); // указыает конец пути фигуры
 
@@ -6412,42 +6564,42 @@ const c = canvas.getContext("2d"); // задаём пространство дл
 
 // РИСОВАЛКА В КАНВАС
 
-const w = canvas.width;
-const h = canvas.height;
+// const w = canvas.width;
+// const h = canvas.height;
 
-const mouse = { x: 0, y: 0 };
-let draw = false;
+// const mouse = { x: 0, y: 0 };
+// let draw = false;
 
 
-// нажатие мыши
-canvas.addEventListener("mousedown", function (e) {
-    mouse.x = e.pageX - this.offsetLeft;
-    mouse.y = e.pageY - this.offsetTop;
-    draw = true;
-    c.beginPath();
-    c.moveTo(mouse.x, mouse.y);
+// // нажатие мыши
+// canvas.addEventListener("mousedown", function (e) {
+//     mouse.x = e.pageX - this.offsetLeft;
+//     mouse.y = e.pageY - this.offsetTop;
+//     draw = true;
+//     c.beginPath();
+//     c.moveTo(mouse.x, mouse.y);
 
-});
+// });
 
-// перемещение мыши
-canvas.addEventListener("mousemove", function (e) {
-    if (draw) { // draw == true
-        mouse.x = e.pageX - this.offsetLeft;
-        mouse.y = e.pageY - this.offsetTop;
-        c.lineTo(mouse.x, mouse.y);
-        c.stroke();
-    }
-});
+// // перемещение мыши
+// canvas.addEventListener("mousemove", function (e) {
+//     if (draw) { // draw == true
+//         mouse.x = e.pageX - this.offsetLeft;
+//         mouse.y = e.pageY - this.offsetTop;
+//         c.lineTo(mouse.x, mouse.y);
+//         c.stroke();
+//     }
+// });
 
-// отпускаем мышь
-canvas.addEventListener("mouseup", function (e) {
-    mouse.x = e.pageX - this.offsetLeft;
-    mouse.y = e.pageY - this.offsetTop;
-    c.lineTo(mouse.x, mouse.y);
-    c.stroke();
+// // отпускаем мышь
+// canvas.addEventListener("mouseup", function (e) {
+//     mouse.x = e.pageX - this.offsetLeft;
+//     mouse.y = e.pageY - this.offsetTop;
+//     c.lineTo(mouse.x, mouse.y);
+//     c.stroke();
 
-    c.closePath();
-    draw = false;
-});
+//     c.closePath();
+//     draw = false;
+// });
 
-// commit
+// // commit

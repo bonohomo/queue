@@ -520,7 +520,27 @@
         <h2></h2>
     </div> -->
 
-    <canvas id="test" width="520" height="320" style="border: 1px solid black;">Вы видите этот текст, потому что тег не поддерживается</canvas>
+    <h2>User Registration</h2>
+    <div id="errorMessages" style="color: red"></div>
+    <form id="registrationForm">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <input type="submit" value="Register">
+        </div>
+    </form>
+
+    <!-- <canvas id="test" width="520" height="320" style="border: 1px solid black;">Вы видите этот текст, потому что тег не поддерживается</canvas> -->
 
     <script src="script.js"></script>
 </body>

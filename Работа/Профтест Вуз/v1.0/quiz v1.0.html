@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест на профориентацию</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a0a3a 0%, #2d1b4e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* ==================== SCREEN 1: INTRO ==================== */
+        .screen {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .intro-screen {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .intro-screen h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .intro-screen .subtitle {
+            font-size: 16px;
+            color: #b0a5d9;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .intro-screen .description {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #d4d4d4;
+            text-align: left;
+        }
+
+        .intro-screen .description p {
+            margin-bottom: 15px;
+        }
+
+        .intro-screen .description p:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(124, 58, 237, 0.4);
+        }
+
+        .small-p {
+            font-size: 12px;
+        }
+
+        /* ==================== SCREEN 2: QUIZ ==================== */
+        .quiz-screen {
+            padding: 40px;
+        }
+
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .progress-btn {
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px;
+            font-weight: 600;
+            cursor: not-allowed;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .progress-btn.completed {
+            background: rgba(124, 58, 237, 0.5);
+            border-color: #7c3aed;
+            color: white;
+        }
+
+        .progress-btn.current {
+            background: #7c3aed;
+            border-color: #7c3aed;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.6);
+        }
+
+        .question-block {
+            margin-bottom: 40px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .likert-scale {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .answer-btn {
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .answer-btn:hover {
+            border-color: #7c3aed;
+            color: #7c3aed;
+            transform: scale(1.1);
+        }
+
+        .answer-btn.active {
+            background: #7c3aed;
+            border-color: #7c3aed;
+            color: white;
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+        }
+
+        .likert-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #b0a5d9;
+            margin-top: 15px;
+        }
+
+        /* ==================== INPUT FIELDS FOR CONTACT DATA ==================== */
+        .input-field {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .input-field input {
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .input-field input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-field input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            border-color: #7c3aed;
+            color: #7c3aed;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .question-counter {
+            text-align: center;
+            font-size: 14px;
+            color: #b0a5d9;
+            min-width: 80px;
+        }
+
+        /* ==================== SCREEN 3: RESULTS ==================== */
+        .results-screen {
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .results-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #7c3aed;
+            line-height: 1.8;
+        }
+
+        .result-card.validation {
+            margin-top: 20px;
+            background: rgba(255, 193, 7, 0.1);
+            border-left-color: #ffc107;
+        }
+
+        .result-card h1 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7c3aed;
+        }
+
+        .result-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7c3aed;
+        }
+
+        .result-card a {
+            text-decoration: underline;
+            color: #7c3aed;
+        }
+
+        .result-card.validation h3 {
+            color: #ffc107;
+        }
+
+        .result-skills h3 {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .result-card p {
+            font-size: 14px;
+            color: #d4d4d4;
+            margin-bottom: 10px;
+        }
+
+        .result-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .score-item {
+            background: rgba(124, 58, 237, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+        }
+
+        .score-label {
+            font-size: 11px;
+            color: #b0a5d9;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 600;
+            word-break: break-word;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            line-height: 1.2;
+            font-size: 11px;
+            padding: 4px;
+        }
+
+        .score-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #7c3aed;
+        }
+
+        .btn-restart {
+            display: inline-block;
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn-restart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(124, 58, 237, 0.4);
+        }
+
+        .loading-message {
+            text-align: center;
+            font-size: 16px;
+            color: #b0a5d9;
+            margin-top: 20px;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .quiz-screen {
+                padding: 20px;
+            }
+
+            .progress-bar {
+                margin-bottom: 30px;
+            }
+
+            .progress-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 9px;
+            }
+
+            .question-text {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .answer-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 14px;
+            }
+
+            .likert-scale {
+                gap: 8px;
+            }
+
+            .input-field input {
+                max-width: 100%;
+            }
+
+            .scores-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
+
+            .intro-screen {
+                padding: 40px 20px;
+            }
+
+            .intro-screen h1 {
+                font-size: 24px;
+            }
+
+            .results-screen {
+                padding: 20px;
+            }
+
+            .results-title {
+                font-size: 24px;
+            }
+
+            .score-item::after {
+                width: 20px;
+                height: 20px;
+                font-size: 13px;
+                transform: translate(30%, -30%);
+            }
+        }
+
+        /* ПОПАПЫ НА КОМПЕТЕНЦИЯХ */
+
+        .system-card {
+            position: relative;
+            max-width: 720px;
+            padding: 40px 42px;
+            border-radius: 24px;
+            background: #1a0b3a;
+            color: #ffffff;
+            font-family: sans-serif;
+            box-shadow: 0px 40px 80px 0px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Эмодзи через ::before */
+        .system-card::before {
+            content: var(--emoji, "⚙️");
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 40px;
+        }
+
+        /* Кнопка закрытия */
+        .system-card__close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 20px;
+            height: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .system-card__close::before,
+        .system-card__close::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 25px;
+            height: 4px;
+            background: #cfc6e6;
+        }
+
+        .system-card__close::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .system-card__close::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        /* Заголовок */
+        .system-card__title {
+            margin: 0 0 20px;
+            color: rgba(255, 255, 255, 1);
+            font-family: 'Segoe UI';
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 26px;
+            letter-spacing: 0px;
+        }
+
+        /* Линия */
+        .system-card__divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        /* Текст */
+        .system-card__text {
+            margin: 0 0 22px;
+            line-height: 1.6;
+            color: rgba(216, 213, 240, 1);
+            font-family: 'Segoe UI';
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 18px;
+            letter-spacing: 0px;
+        }
+
+        .score-item {
+            position: relative;
+            padding-top: 20px;
+            /* даём место под плюс */
+        }
+
+        /* ПЛЮС */
+        .score-item::after {
+            content: "+";
+            position: absolute;
+
+            top: 8px;
+            /* фиксированная позиция */
+            right: 8px;
+
+            width: 22px;
+            height: 22px;
+
+            border-radius: 50%;
+            background: rgba(124, 58, 237, 0.95);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+
+            z-index: 2;
+        }
+
+        .score-item:hover::after {
+            transform: translate(40%, -40%) scale(1.1);
+            background: #7c3aed;
+        }
+
+        .score-item:active::after {
+            transform: translate(40%, -40%) scale(0.9);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- SCREEN 1: INTRO -->
+        <div class="screen intro-screen active">
+            <h1>Тест на профориентацию</h1>
+            <p class="subtitle">Пройди тест и определись с будущей профессией</p>
+
+            <div class="description">
+                <p>Привет! Готовься сделать первый стратегический шаг в своей ИТ-карьере. Этот тест помогает тебе не
+                    просто выбрать направление, а найти ту область (от Data Science до Web-разработки), где твой
+                    потенциал принесет максимальный результат.</p>
+                <p>Ответь на 55 вопросов честно. Здесь нет правильных ответов — только твои реальные предпочтения,
+                    которые
+                    приведут тебя к успешному трудоустройству.</p>
+                <p class="small-p">Нажимая на кнопку "Начать", я соглашаюсь на&nbsp;<a
+                        href="https://msk.top-academy.ru/static/doc/privacy.pdf" target="_blank"
+                        rel="noreferrer noopener">обработку персональных данных</a></p>
+            </div>
+
+            <button class="btn-start" onclick="startQuiz()">Начать</button>
+        </div>
+
+        <!-- SCREEN 2: QUIZ -->
+        <div class="screen quiz-screen">
+            <div class="progress-bar" id="progressBar"></div>
+
+            <div class="question-block">
+                <div class="question-text" id="questionText"></div>
+                <div id="questionContent"></div>
+                <div class="likert-labels" id="likertLabels" style="display:none;">
+                    <span>Совсем не про меня</span>
+                    <span>Это точно про меня</span>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()" disabled>‹</button>
+                <div class="question-counter">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">55</span>
+                </div>
+                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()" disabled>›</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: RESULTS -->
+        <div class="screen results-screen" id="resultsScreen">
+            <div class="results-title">&#x1F3AF; Результаты теста</div>
+            <div id="resultsContainer"></div>
+            <div class="loading-message" id="loadingMessage" style="display:none;">⏳ Отправляю данные...</div>
+            <button class="btn-restart" onclick="restartQuiz()">Пройти заново</button>
+        </div>
+    </div>
+    <!-- POPUP -->
+    <div id="scorePopupOverlay" onclick="closeScorePopup()"
+        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:999; align-items:center; justify-content:center;">
+
+        <div class="system-card" id="scorePopup" onclick="event.stopPropagation()">
+            <button class="system-card__close" onclick="closeScorePopup()"></button>
+
+            <h2 class="system-card__title" id="popupTitle"></h2>
+
+            <div class="system-card__divider"></div>
+
+            <p class="system-card__text" id="popupText1"></p>
+            <p class="system-card__text" id="popupText2"></p>
+        </div>
+
+    </div>
+
+    <script>
+        // ==================== DATA ====================
+        const CITY_NAME = (new URLSearchParams(window.location.search)).get('city')?.toLowerCase() || '';
+        const QUESTIONS = [
+            { id: 'q1', text: 'Мне интересно разобраться, как устроена игра или сайт «под капотом».', variable: 'Score_L', type: 'likert' },
+            { id: 'q2', text: 'Если у приложения некрасивая иконка или шрифт, я вряд ли буду им пользоваться.', variable: 'Score_V', type: 'likert' },
+            { id: 'q3', text: 'В компаниях я обычно тот, кто пишет список дел и следит за временем.', variable: 'Score_M', type: 'likert' },
+            { id: 'q4', text: 'Я всегда читаю правила игры, чтобы найти в них лазейки или важные детали. ', variable: 'Score_S', type: 'likert' },
+            { id: 'q5', text: 'Я могу объяснить бабушке сложную вещь так, что она всё поймет.', variable: 'Score_C', type: 'likert' },
+            { id: 'q6', text: 'Я никогда в жизни не обманывал, даже в самых мелких вещах.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q7', text: 'Я часто думаю, какой сервис я мог бы запустить сейчас, чтобы заработать.', variable: 'Anc_EC', type: 'likert' },
+            { id: 'q8', text: 'Я могу часами искать ошибку в коде или задаче, пока всё не заработает.', variable: 'Score_L', type: 'likert' },
+            { id: 'q9', text: 'Для меня важно, чтобы мои профили в соцсетях выглядели стильно.', variable: 'Score_V', type: 'likert' },
+            { id: 'q10', text: 'В командных проектах я обычно беру на себя роль лидера/координатора.', variable: 'Score_M', type: 'likert' },
+            { id: 'q11', text: 'Меня бесит, когда кто-то выдает мои идеи за свои.', variable: 'Score_S', type: 'likert' },
+            { id: 'q12', text: 'Я всегда внимательно слушаю собеседника и никогда не отвлекаюсь.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q13', text: 'Я лучше буду крутым профи-одиночкой, чем руководителем большой группы.', variable: 'Anc_TF', type: 'likert' },
+            { id: 'q14', text: 'Для меня свободный график важнее, чем высокая должность в офисе.', variable: 'Anc_AU', type: 'likert' },
+            { id: 'q15', text: 'Мне больше нравится решать логические задачки, чем писать сочинения.', variable: 'Score_L', type: 'likert' },
+            { id: 'q16', text: 'Я сразу замечаю, если на сайте криво стоит кнопка или цвета «режут» глаз.', variable: 'Score_V', type: 'likert' },
+            { id: 'q17', text: 'Я часто придумываю, как сделать привычное дело (или уроки) быстрее.', variable: 'Score_M', type: 'likert' },
+            { id: 'q18', text: 'Я умею так рассказать об идее, что другие загораются и хотят помочь.', variable: 'Score_C', type: 'likert' },
+            { id: 'q19', text: 'У меня никогда не бывает плохих мыслей о людях, которые мне неприятны.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q20', text: 'Я хочу, чтобы моя работа реально помогала планете или лечила людей.', variable: 'Anc_SV', type: 'likert' },
+            { id: 'q21', text: 'Я быстро бросаю дело, если в нем нет никакого вызова или сложности.', variable: 'Anc_CH', type: 'likert' },
+            { id: 'q22', text: 'Мне интересно, как хакеры взламывают аккаунты и как от этого защититься.', variable: 'Score_S', type: 'likert' },
+            { id: 'q23', text: 'Я больше верю точным цифрам и фактам, чем советам и интуиции.', variable: 'Score_L', type: 'likert' },
+            { id: 'q24', text: 'Я всегда признаю свою неправоту сразу, без споров и оправданий.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q25', text: 'Я часто думаю, как изменить дизайн вещей, чтобы они стали удобнее.', variable: 'Score_V', type: 'likert' },
+            { id: 'q26', text: 'Мне интересно, почему одни блогеры становятся популярными, а другие нет.', variable: 'Score_M', type: 'likert' },
+            { id: 'q27', text: 'В споре я ищу правила или законы, чтобы доказать правоту фактами.', variable: 'Score_S', type: 'likert' },
+            { id: 'q28', text: 'Я никогда не злюсь и не обижаюсь, когда меня критикуют.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q29', text: 'Я легко нахожу общий язык с самыми разными людьми.', variable: 'Score_C', type: 'likert' },
+            { id: 'q30', text: 'Я мечтаю стать главным в большой компании и принимать важные решения.', variable: 'Anc_GM', type: 'likert' },
+            { id: 'q31', text: 'Мне нравится настраивать технику «под себя» и подключать умные функции.', variable: 'Score_L', type: 'likert' },
+            { id: 'q32', text: 'Удобство сайта важнее, чем то, насколько сложно он запрограммирован.', variable: 'Score_V', type: 'likert' },
+            { id: 'q33', text: 'Я готов отвечать за итоговый результат проекта перед всей командой.', variable: 'Score_M', type: 'likert' },
+            { id: 'q34', text: 'Я ни разу в жизни не взял без спроса даже чужую ручку или мелочь.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q35', text: 'Мне интересно смотреть фильмы про цифровые расследования и шпионов.', variable: 'Score_S', type: 'likert' },
+            { id: 'q36', text: 'Я хочу создать свой бренд, который станет известным благодаря мне.', variable: 'Anc_EC', type: 'likert' },
+            { id: 'q37', text: 'Мне нравится быть посредником — объяснять технарям запросы людей.', variable: 'Score_C', type: 'likert' },
+            { id: 'q38', text: 'Я никогда не ленюсь, если передо мной стоит важная задача.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q39', text: 'Я люблю строить сложные схемы или алгоритмы в играх (Minecraft, стратегии).', variable: 'Score_L', type: 'likert' },
+            { id: 'q40', text: 'Я люблю рисовать или создавать 3D-миры в специальных программах.', variable: 'Score_V', type: 'likert' },
+            { id: 'q41', text: 'Я всегда смотрю, к каким данным просит доступ приложение при установке.', variable: 'Score_S', type: 'likert' },
+            { id: 'q42', text: 'Я всегда искренне радуюсь успехам других, даже если сам проиграл.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q43', text: 'Мне нравится договариваться с людьми на выгодных для меня условиях.', variable: 'Score_C', type: 'likert' },
+            { id: 'q44', text: 'Я лучше всего работаю, когда меня никто не контролирует.', variable: 'Anc_AU', type: 'likert' },
+            { id: 'q45', text: 'Я хочу стать экспертом №1, чтобы люди стояли в очереди за моими советами.', variable: 'Anc_TF', type: 'likert' },
+            { id: 'q46', text: 'Мне интересно, как наказать тех, кто ворует чужой контент в интернете.', variable: 'Score_S', type: 'likert' },
+            { id: 'q47', text: 'Я никогда в жизни не опаздывал и не заставлял других ждать.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q48', text: 'Я считаю, что реклама важнее для успеха продукта, чем его функции.', variable: 'Score_C', type: 'likert' },
+            { id: 'q49', text: 'Я постоянно ищу задачи на грани своих возможностей, чтобы не скучать.', variable: 'Anc_CH', type: 'likert' },
+            { id: 'q50', text: 'Для меня важно иметь право последнего слова в команде.', variable: 'Anc_GM', type: 'likert' },
+            { id: 'q51', text: 'Я готов работать в проекте с великой миссией даже за меньшие деньги.', variable: 'Anc_SV', type: 'likert' },
+            { id: 'q52', text: 'Я всегда со всеми вежлив, даже с теми, кто мне грубит.', variable: 'Score_Val', type: 'likert' },
+            { id: 'q53', text: 'Как вас зовут?', variable: 'contact_name', name: 'name', type: 'input', placeholder: 'Введите ваше имя' },
+            { id: 'q54', text: 'Ваш телефон', variable: 'contact_phone', name: 'phone', type: 'input', placeholder: '+7 (999) 999-99-99' },
+            { id: 'q55', text: 'Ваш email', variable: 'contact_email', name: 'email', type: 'input', placeholder: 'your@email.com' }
+        ];
+
+        /* Валидаторы */
+        function isValidName(name) {
+            if (!name) return false;
+            const s = name.trim();
+            return s.length >= 2 && /^[A-Za-zА-Яа-яЁё \-']+$/.test(s);
+        }
+
+        function normalizePhone(value) {
+            if (!value) return '';
+            let digits = value.replace(/\D/g, '');
+            if (digits.startsWith('8')) digits = '7' + digits.slice(1);
+            // если ввели 10 цифр (без кода) — добавим 7
+            if (digits.length === 10) digits = '7' + digits;
+            return digits;
+        }
+
+        function isValidPhone(value) {
+            const d = normalizePhone(value);
+            // жёсткое требование: 11 цифр и начинается с 7 (Россия)
+            return d.length === 11 && d[0] === '7';
+        }
+
+        /* Небольшой форматтер для показа аккуратного вида при blur */
+        function formatRuPhone(value) {
+            let digits = normalizePhone(value);
+            if (!digits) return '';
+            digits = digits.slice(1, 11);
+            let out = '+7';
+            if (digits.length > 0) out += ' (';
+            if (digits.length <= 3) out += digits;
+            else out += digits.slice(0, 3) + ') ';
+            if (digits.length > 3) {
+                if (digits.length <= 6) out += digits.slice(3);
+                else out += digits.slice(3, 6) + '-';
+            }
+            if (digits.length > 6) {
+                if (digits.length <= 8) out += digits.slice(6);
+                else out += digits.slice(6, 8) + '-';
+            }
+            if (digits.length > 8) out += digits.slice(8, 10);
+            return out;
+        }
+
+        function isValidEmail(email) {
+            if (!email) return false;
+            return /^[a-z0-9-.%_]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email.trim());
+        }
+
+        const PROFILES = {
+            L: { name: 'Проектирование и Разработка ПО', desc: 'Это «машиностроительный завод» цифровой эпохи. Здесь создается фундамент всего: от мобильных игр до сложных нейросетей. Если ты любишь видеть, как из твоих идей и строк кода рождается работающий механизм, решающий задачи тысяч людей — тебе сюда.', professions: 'Backend/Frontend разработчик, Архитектор баз данных, Инженер нейросетей, Мобильный разработчик.', flagship: { name: 'Backend-разработчик', desc: 'Ты строишь «логику» и «внутренние стены» приложения. Ты прописываешь, как данные передаются между сервером и пользователем, и следишь, чтобы система не рухнула при наплыве миллиона человек.', salary: '190к–350к ₽', kpi: 'Стабильность кода' } },
+            V: { name: 'Дизайн и Креативные технологии', desc: 'Территория эмоций и опыта. Здесь технологии превращаются в удобные и красивые продукты. Это выбор для тех, кто понимает психологию людей и хочет создавать интерфейсы будущего в 2D, 3D или VR.', professions: 'UI/UX Дизайнер, 3D-Generalist, Геймдизайнер, VR/AR разработчик.', flagship: { name: 'UI/UX Дизайнер:', desc: 'Ты проектируешь «путь» пользователя. Твоя задача — сделать так, чтобы приложением было не просто красиво, а максимально удобно пользоваться, и нужная кнопка находилась сама собой.', salary: '150к–280к ₽', kpi: 'Удержание юзеров (Retention)' } },
+            S: { name: 'Кибербезопасность', desc: 'Цифровой спецназ. В 2026 году это защита не только паролей, но и инфраструктуры целых городов. Здесь работают люди с холодным умом и детективным мышлением, которые всегда на шагпереди хакеров.', professions: 'Аналитик ИБ, Пентестер (этичный хакер), DevSecOps-инженер, Расследователь киберпреступлений', flagship: { name: 'Пентестер', desc: 'Ты — «легальный хакер». Ты взламываешь системы своей компании, чтобы найти «дыры» в защите раньше, чем это сделают преступники, и помогаешь их закрыть.', salary: '210к–380к ₽', kpi: 'Найденные уязвимости' } },
+            M: { name: 'IT-Менеджмент и Маркетинг', desc: 'Управление смыслами и ресурсами. Ты превращаешь строки кода в миллионные прибыли. Это выбор для лидеров, которые готовы собрать команду, зажечь её идеей и довести продукт до успеха на рынке.', professions: 'Product/Project Manager, Digital-маркетолог, Team Lead, Продюсер игр', flagship: { name: 'Product Manager', desc: 'Ты «мини-директор» продукта. Ты решаешь, какие функции нужны людям, и координируешь работу программистов, дизайнеров и маркетологов.', salary: '180к–340к ₽', kpi: 'Прибыльность продукта (ROI)' } },
+            SC: { name: 'Юриспруденция в IT и Digital Law', desc: 'Элита на стыке закона и технологий. Ты решаешь, кому принадлежит контент нейросетей и как защитить данные в мире без границ. Это работа для тех, кто умеет находить истину в правилах и защищать интересы людей в цифровой среде.', professions: 'IT-юрист, Патентный поверенный, Специалист по LegalTech, Этический комиссар ИИ', flagship: { name: 'IT-Юрист', desc: 'Ты оформляешь права на код и контент, защищаешь стартапы от кражи идей и следишь, чтобы использование технологий не нарушало законы и этику.', salary: '160к–290к ₽', kpi: 'Юридическая безопасность' } }
+        };
+
+        const ANCHORS = {
+            SV: { name: 'Служение', advice: 'Твоя работа должна менять мир к лучшему. Для тебя важно видеть смысл в том, что ты делаешь: помогать экологии, медицине или образованию.<br><br>Совет: Деньги без высокой миссии тебя не обрадуют. Ищи проекты в сферах EdTech, MedTech или GreenTech — там ты будешь максимально продуктивен.' },
+            EC: { name: 'Предпринимательство', advice: 'Тебе жизненно необходимо создавать свое. Ты не можешь просто выполнять чужие задания — тебе нужно видеть свое прямое влияние на итоговый продукт.<br><br>Совет: Тебе будет тесно в жестких рамках. Твой путь — запуск собственных стартапов или роль лидера продукта, где у тебя будет право на риск и свободу действий.' },
+            TF: { name: 'Мастерство', advice: 'Твой драйвер — глубина знаний. Тебе важно быть «самым крутым экспертом» в своей узкой теме, к которому все приходят за советом.<br><br>Совет: Не стремись стать начальником ради статуса — это может оторвать тебя от любимого дела. Твой путь — стать высокооплачиваемым экспертом-архитектором.' },
+            CH: { name: 'Вызов', advice: 'Ты «охотник» за сложными задачами. Тебе скучно, когда всё понятно и стабильно. Тебе нужен драйв, борьба и решение проблем, которые другим не под силу.<br><br>Совет: Ищи работу в быстрорастущих стартапах или отделах разработки инноваций (R&D). Как только проект станет рутиной — ищи новый вызов.' },
+            GM: { name: 'Управление', advice: 'Твой талант — объединять людей и ресурсы для достижения цели. Тебе нравится нести ответственность за общий результат и чувствовать власть над процессами.<br><br>Совет: Тебе скучно работать в одиночку над кодом. Меть в руководители проектов и Team Lead-ы — твоя сила в масштабировании чужих усилий.' },
+            AU: { name: 'Автономия', advice: 'Ты ценишь независимость. Жесткий контроль, офисный график «с 9 до 18» и микроменеджмент убивают твою продуктивность.<br><br>Совет: Твой идеальный формат — фриланс или удаленная работа в компаниях с гибким графиком. Тебе важно, чтобы оценивали результат, а не время в офисе.' }
+        };
+
+        const SCORE_POPUPS = {
+            L: {
+                title: 'Системное мышление',
+                text1: 'Способность видеть структуру в сложных системах.',
+                text2: 'Вы находите корень проблемы и проектируете надежные решения.',
+                emoji: '⚙️'
+            },
+            V: {
+                title: 'Творческий подход',
+                text1: 'Умение синтезировать идеи и находить нестандартные выходы там, где буксуют привычные алгоритмы.',
+                text2: 'Чем выше балл, тем эффективнее вы находите решения в тупиковых ситуациях, совмещая опыт из разных сфер для создания уникального продукта.',
+                emoji: '🎨'
+            },
+            S: {
+                title: 'Исследователь',
+                text1: 'Анализ и поиск закономерностей — ваша сила.',
+                text2: 'Вы принимаете решения на основе данных.',
+                emoji: '📊'
+            },
+            M: {
+                title: 'Творческий подход',
+                text1: 'Вы мыслите образами и идеями.',
+                text2: 'Создаете удобные и красивые решения.',
+                emoji: '🎨'
+            }
+        };
+
+        // ==================== STATE ====================
+        let currentQuestion = 0;
+        let answers = {};
+        let completed = {};
+        let attemptedNext = {};
+        let leader_desc = '';
+
+        // ==================== FUNCTIONS ====================
+        function startQuiz() {
+            showScreen('quiz');
+            renderProgress();
+            renderQuestion();
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            completed = {};
+            attemptedNext = {};
+            showScreen('intro');
+        }
+
+        function showScreen(screenName) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            if (screenName === 'intro') {
+                document.querySelector('.intro-screen').classList.add('active');
+            } else if (screenName === 'quiz') {
+                document.querySelector('.quiz-screen').classList.add('active');
+            } else if (screenName === 'results') {
+                document.querySelector('.results-screen').classList.add('active');
+            }
+        }
+
+        function renderProgress() {
+            const bar = document.getElementById('progressBar');
+            bar.innerHTML = '';
+            for (let i = 0; i < QUESTIONS.length; i++) {
+                const btn = document.createElement('div');
+                btn.className = 'progress-btn';
+                if (completed[i]) btn.classList.add('completed');
+                if (i === currentQuestion) btn.classList.add('current');
+                btn.textContent = i + 1;
+                bar.appendChild(btn);
+            }
+        }
+
+        function renderQuestion() {
+            const q = QUESTIONS[currentQuestion];
+            document.getElementById('questionText').textContent = q.text;
+            document.getElementById('currentQuestion').textContent = currentQuestion + 1;
+            document.getElementById('totalQuestions').textContent = QUESTIONS.length;
+
+            const contentDiv = document.getElementById('questionContent');
+            const likertLabelsDiv = document.getElementById('likertLabels');
+            contentDiv.innerHTML = '';
+            let inputEl = null;
+
+            if (q.type === 'likert') {
+                likertLabelsDiv.style.display = 'flex';
+                const scale = document.createElement('div');
+                scale.className = 'likert-scale';
+
+                for (let i = 1; i <= 5; i++) {
+                    const btn = document.createElement('button');
+                    btn.className = 'answer-btn';
+                    btn.textContent = i;
+                    if (answers[currentQuestion] === i) btn.classList.add('active');
+                    btn.onclick = () => selectAnswer(i);
+                    scale.appendChild(btn);
+                }
+                contentDiv.appendChild(scale);
+            } else if (q.type === 'input') {
+                likertLabelsDiv.style.display = 'none';
+                const inputDiv = document.createElement('div');
+                inputDiv.className = 'input-field';
+
+                const input = document.createElement('input');
+                input.type = q.variable === 'contact_phone' ? 'tel' : (q.variable === 'contact_email' ? 'email' : 'text');
+                input.placeholder = q.placeholder;
+                input.value = answers[currentQuestion] || '';
+                input.name = q.name || q.variable;
+                inputEl = input;
+
+                // error message
+                const error = document.createElement('div');
+                error.className = 'input-error';
+                error.style.color = 'rgba(255,100,100,0.95)';
+                error.style.fontSize = '13px';
+                error.style.marginTop = '6px';
+                error.textContent = '';
+
+                // Автокомплит
+                if (q.variable === 'contact_name') input.setAttribute('autocomplete', 'name');
+                else if (q.variable === 'contact_phone') input.setAttribute('autocomplete', 'tel');
+                else if (q.variable === 'contact_email') input.setAttribute('autocomplete', 'email');
+
+                // Валидация на ввод (live)
+                input.addEventListener('input', () => {
+                    const val = input.value;
+
+                    let valid = true;
+                    if (q.variable === 'contact_name') valid = isValidName(val);
+                    else if (q.variable === 'contact_phone') valid = isValidPhone(val);
+                    else if (q.variable === 'contact_email') valid = isValidEmail(val);
+
+                    if (valid) {
+                        // Записываем нормализованную/trim версию в answers
+                        if (q.variable === 'contact_phone') {
+                            answers[currentQuestion] = normalizePhone(val);
+                        } else {
+                            answers[currentQuestion] = val.trim();
+                        }
+                        completed[currentQuestion] = true;
+                        if (attemptedNext[currentQuestion]) {
+                            attemptedNext[currentQuestion] = false;
+                        }
+                        error.textContent = '';
+                    } else {
+                        // Если невалидно — не даём идти дальше
+                        answers[currentQuestion] = '';
+                        delete completed[currentQuestion];
+                    }
+
+                    renderProgress();
+                    // кнопка "далее" зависит от заполненности поля
+                    const hasAnswer = input.value.trim() !== '';
+                    document.getElementById('nextBtn').disabled = !hasAnswer;
+                });
+
+                // Форматируем телефон аккуратно при выходе (blur)
+                input.addEventListener('blur', () => {
+                    if (q.variable === 'contact_phone') {
+                        input.value = formatRuPhone(input.value);
+                    }
+                    // если поле пустое или невалидно — показать ошибку
+                    if (!answers[currentQuestion]) {
+                        if (input.value.trim() !== '') {
+                            error.style.display = 'block';
+                        }
+                    } else {
+                        error.style.display = 'none';
+                    }
+                });
+
+                inputDiv.appendChild(input);
+                inputDiv.appendChild(error);
+                contentDiv.appendChild(inputDiv);
+                input.focus();
+
+                // Убедимся, что кнопка "далее" в правильном состоянии при рендере
+                const hasAnswerNow = input.value.trim() !== '';
+                document.getElementById('nextBtn').disabled = !hasAnswerNow;
+            }
+
+
+            // Запрет на переход назад
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+
+            // Запрет на переход вперед без ответа
+            const hasAnswer = q.type === 'input' && inputEl
+                ? inputEl.value.trim() !== ''
+                : answers[currentQuestion] !== undefined && answers[currentQuestion] !== '';
+            document.getElementById('nextBtn').disabled = !hasAnswer;
+            document.getElementById('nextBtn').textContent = currentQuestion === QUESTIONS.length - 1 ? '✓' : '›';
+        }
+
+        function selectAnswer(value) {
+            answers[currentQuestion] = value;
+            completed[currentQuestion] = true;
+            renderProgress();
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            const q = QUESTIONS[currentQuestion];
+            if (q.type === 'input') {
+                const input = document.querySelector('#questionContent input');
+                const error = document.querySelector('#questionContent .input-error');
+                const val = input ? input.value : '';
+                let valid = true;
+                if (q.variable === 'contact_name') valid = isValidName(val);
+                else if (q.variable === 'contact_phone') valid = isValidPhone(val);
+                else if (q.variable === 'contact_email') valid = isValidEmail(val);
+
+                if (!valid) {
+                    attemptedNext[currentQuestion] = true;
+                    if (error) {
+                        if (q.variable === 'contact_name') error.textContent = 'Введите корректное имя (только буквы, минимум 2 символа)';
+                        if (q.variable === 'contact_phone') error.textContent = 'Введите корректный телефон (например +7 (999) 999-99-99)';
+                        if (q.variable === 'contact_email') error.textContent = 'Введите корректный email';
+                    }
+                    return;
+                }
+            }
+            const hasAnswer = answers[currentQuestion] !== undefined && answers[currentQuestion] !== '';
+            if (!hasAnswer) {
+                alert('Пожалуйста, ответьте на вопрос перед тем как продолжить');
+                return;
+            }
+            if (currentQuestion < QUESTIONS.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else if (currentQuestion === QUESTIONS.length - 1 && hasAnswer) {
+                calculateResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        // ПОПАПЫ
+        function openScorePopup(key) {
+            const data = SCORE_POPUPS[key];
+            if (!data) return;
+
+            document.getElementById('popupTitle').innerText = data.title;
+            document.getElementById('popupText1').innerText = data.text1;
+            document.getElementById('popupText2').innerText = data.text2;
+
+            const popup = document.getElementById('scorePopup');
+            popup.style.setProperty('--emoji', `"${data.emoji}"`);
+            document.getElementById('scorePopupOverlay').style.display = 'flex';
+        }
+
+        function closeScorePopup() {
+            document.getElementById('scorePopupOverlay').style.display = 'none';
+        }
+
+        const CRM_CODE_TEXTS = {
+            P: 'P: Мастер реализации (Практический подход) \n\n Вы — человек действия. Абстрактные теории вас утомляют, если их нельзя применить здесь и сейчас. Ваша суперсила — превращать идеи в осязаемый результат. Вам важно видеть плоды своего труда: работающее приложение, настроенный сервер или красивый сайт. Вы учитесь через руки и практику.\n\n Примеры профессий: Fullstack-разработчик, Разработчик мобильных приложений, Тестировщик (QA), Инженер техподдержки.',
+            R: 'R: Архитектор систем (Системное мышление) \n\n Ваш склад ума заточен на поиск логики и структуры. Вы видите мир не как хаос событий, а как набор алгоритмов, которые можно оптимизировать. Вам комфортнее работать с кодом и сложными механизмами, чем улаживать эмоциональные конфликты. Вы способны удерживать в голове сложные схемы и находить причины сбоев там, где другие сдаются.\n\n Примеры профессий: Бэкенд-разработчик, DevOps-инженер, Архитектор баз данных, Специалист по кибербезопасности.',
+            I: 'I: Исследователь данных (Аналитический склад) \n\n Вы — стратег и детектив в мире информации. Прежде чем принять решение, вы собираете факты, цифры и доказательства. Ваша сила — в умении замечать скрытые закономерности и тренды. Там, где другие действуют наугад, вы строите точные прогнозы на основе данных.\n\n Примеры профессий: Data Scientist, Инженер данных, Системный аналитик, ML-инженер.',
+            A: 'A: Визионер и Креатор (Творческий подход) \n\n Вы воспринимаете мир через образы, идеи и эстетику. Жесткие инструкции убивают вашу продуктивность — вам нужен воздух для экспериментов. Ваша роль в IT — "очеловечивать" технологии, делая их удобными, красивыми и понятными. Вы являетесь мостом между сухим кодом и эмоциями пользователя.\n\n Примеры профессий: UX/UI Дизайнер, Геймдизайнер, Графический дизайнер, Моушн-дизайнер.',
+            S: 'S: Коммуникатор и Интегратор \n\n Ваша главная технология — это эмпатия и общение. В IT-сфере вы на вес золота, так как умеете переводить с "технического" на "человеческий", гасить конфликты и объединять людей ради общей цели. Вы — тот клей, который держит команду вместе и двигает проекты вперед.\n\n Примеры профессий: Project Manager, HR-менеджер в IT, Scrum-мастер, Account-менеджер.',
+            E: 'E: Предприниматель и Лидер \n\n Вы мыслите категориями результата, прибыли и масштаба. Код для вас — лишь инструмент создания ценности. Вы не боитесь брать ответственность, рисковать и вести за собой людей. Вам важно не просто "делать работу", а влиять на показатели бизнеса и запускать новые проекты.\n\n Примеры профессий: Product Manager, Team Lead, CEO стартапа, Интернет-маркетолог.',
+            C: 'C: Хранитель качества (Структурность)\n\n Ваш талант — педантичность и внимание к деталям. Вы видите ошибки, опечатки и баги, которые пропускают 99% людей. Вы цените предсказуемость, инструкции и порядок. Именно благодаря людям вашего типа хаотичные стартапы превращаются в надежные, работающие как часы системы.\n\n Примеры профессий: QA-инженер (Тестировщик), Технический писатель, Бухгалтер, Администратор БД.',
+            TF: 'TF: Жажда Мастерства. \n\n Что это значит: Вы определяете свой успех уровнем сложности задач, с которыми можете справиться. Вам не важен статус начальника или размер кабинета, вам важно быть признанным экспертом в своей теме. Вы теряете мотивацию, если работа становится административной и отрывает вас от «ремесла». \n\n Вектор развития: Ваш путь — горизонтальный рост до уровня Senior или Principal. Стремитесь к позициям, где вы будете ключевым техническим советником или наставником. Ваша цель — стать «незаменимым профи», чье слово в проекте имеет решающий вес, даже без формальной власти над людьми.',
+            GM: 'GM: Лидерский Потенциал. \n\n Что это значит: В отличие от узких специалистов, вы мыслите масштабно и видите картину целиком. Ваша суперсила — не делать всё руками, а объединять людей и ресурсы для достижения общей цели. Вас не пугает ответственность за чужие результаты, наоборот — вас драйвит возможность влиять на успех организации.\n\n Вектор развития: Ваш путь — вертикальный рост. Технические знания для вас — лишь база, чтобы говорить с командой на одном языке. Развивайте управленческие компетенции (Soft Skills), чтобы претендовать на позиции Team Lead и выше. Ваш статус определяется размером бюджета и команды под вашим управлением.',
+            AU: 'AU: Потребность в Свободе. \n\n Что это значит: Жесткие корпоративные рамки, бюрократия и микроменеджмент вызывают у вас сильное сопротивление. Вы — человек результата, а не процесса. Ваша эффективность максимальна, когда вам ставят цель, но не мешают выбирать способы и время её достижения.\n\n Вектор развития: Ваш путь — проектная работа и независимость. Избегайте позиций с жесткой иерархией. Стремитесь к ролям консультанта, контрактного специалиста или эксперта с гибким графиком. Ваша цель — наработать репутацию, которая позволит вам самому диктовать условия сотрудничества.',
+            SV: 'SV: Миссия и Польза. \n\n Что это значит: Ваша карьера строится вокруг системы ценностей. Работа только ради денег кажется вам пустой тратой жизни. Вы готовы мириться с трудностями, если знаете, что ваш труд реально помогает людям или делает мир лучше. Выгорание наступает при конфликте ваших принципов и целей бизнеса. \n\n Вектор развития: Ваш путь — социально-значимые проекты. При выборе работы ориентируйтесь не на технологию, а на сферу (Домен): медицина, образование, экология, благотворительность. Ваша роль должна иметь прямой, видимый эффект для конечного пользователя.',
+            SE: 'SE: Стремление к Надежности. \n\n Что это значит: Вы — фундамент любой системы. Хаос неопределенности и риски стартапов снижают вашу продуктивность. Вы цените предсказуемость, прозрачные правила игры, социальные гарантии и лояльность. Вы нацелены на "игру в долгую", а не на быстрые скачки. \n\n Вектор развития: Ваш путь — эксперт в корпоративном секторе. Вам идеально подходят крупные системные компании и госструктуры с понятной карьерной лестницей. Сосредоточьтесь на получении сертификатов и глубоком изучении фундаментальных технологий — это ваша валюта безопасности.',
+            LS: 'LS: Гармония Жизни. \n\n Что это значит: Вы не живете, чтобы работать, а работаете, чтобы жить. Для вас карьера — это ресурс для обеспечения жизни, семьи и хобби. Это не значит, что вы ленивы — вы стремитесь к максимальной эффективности, чтобы выполнить задачи качественно, но не жертвовать личным временем.\n\n Вектор развития: Ваш путь — оптимизация и эффективность. Выбирайте роли с четко очерченными границами ответственности и предсказуемой загрузкой. Становитесь мастером автоматизации своей рутины, чтобы выдавать отличный результат, не оставаясь в офисе после 18:00.',
+            EC: 'EC: Предпринимательский Драйв. \n\n Что это значит: Вам тесно в роли простого исполнителя. Вы постоянно оцениваете работу с точки зрения выгоды и эффективности. Вам психологически сложно работать, не видя прямой связи между своими усилиями и финансовым результатом. Вы готовы рисковать ради возможности владеть тем, что создаете.\n\n Вектор развития: Ваш путь — владение продуктом. Даже в найме ищите позиции с долей ответственности за прибыль (P&L) или опционами. Используйте работу в компании как тренажер для получения навыков, чтобы в будущем запустить собственный проект или стартап.',
+            CH: 'CH: Профессиональный Вызов. \n\n Что это значит: Скука и рутина — ваши главные враги. Вы «антикризисный менеджер» по натуре: расцветаете там, где есть нерешаемые задачи, сложные проблемы или новейшие технологии, в которых никто еще не разобрался. Преодоление препятствий — ваше топливо.\n\n Вектор развития: Ваш путь — инновации и R&D. Избегайте позиций "на поддержке" старых систем. Стремитесь в отделы разработки новых продуктов, исследований или туда, где высока цена ошибки. Ваш грейд растет пропорционально сложности проблем, которые вы способны решить.'
+        };
+
+        const PORTFOLIO_DESC = {
+            S: 'Твое портфолио — это участие в конкурсах (типа CTF) или разбор сложных цифровых дел.',
+            L: 'Тебе нужно 3–5 проектов на GitHub (боты, сайты или приложения).',
+            V: 'Оформи 3 кейса на Behance, где видно, как ты решаешь задачу пользователя.',
+            M: '',
+            C: 'Твое портфолио — это участие в конкурсах (типа CTF) или разбор сложных цифровых дел.'
+        };
+
+        function toPlainText(value) {
+            return String(value || '')
+                .replace(/<br\s*\/?>(\s*<br\s*\/?>)*/gi, '\n\n')
+                .replace(/<[^>]*>/g, '')
+                .replace(/\u00a0/g, ' ')
+                .replace(/[ \t]+\n/g, '\n')
+                .replace(/\n{3,}/g, '\n\n')
+                .trim();
+        }
+
+        function getDecodedCRMValue(code) {
+            if (!code) return '';
+            if (CRM_CODE_TEXTS[code]) return CRM_CODE_TEXTS[code];
+
+            if (PROFILES[code]) {
+                return `${code}: ${PROFILES[code].name}\n\n${toPlainText(PROFILES[code].desc)}`;
+            }
+
+            if (ANCHORS[code]) {
+                return `${code}: ${ANCHORS[code].name}\n\n${toPlainText(ANCHORS[code].advice)}`;
+            }
+
+            return code;
+        }
+
+        function calculateResults() {
+            const scores = {
+                Score_S: 0, Score_L: 0, Score_V: 0, Score_M: 0, Score_C: 0,
+                Anc_SV: 0, Anc_EC: 0, Anc_TF: 0, Anc_CH: 0, Anc_GM: 0, Anc_AU: 0,
+                Score_Val: 0
+            };
+
+            QUESTIONS.forEach((q, idx) => {
+                if (q.type === 'likert' && answers[idx]) {
+                    scores[q.variable] += answers[idx];
+                }
+            });
+
+            // Найти Leader и Vice
+            const riasec = { S: scores.Score_S, L: scores.Score_L, V: scores.Score_V, M: scores.Score_M, C: scores.Score_C };
+            const priority = ['S', 'L', 'V', 'M', 'C'];
+            const sorted = Object.entries(riasec).sort((a, b) => {
+                if (b[1] !== a[1]) return b[1] - a[1];
+                return priority.indexOf(a[0]) - priority.indexOf(b[0]);
+            });
+
+            const leader = sorted[0][0];
+            const vice = sorted[1][0];
+
+            let finalLeader = leader;
+
+            const isSecurityCommunication =
+                (leader === 'S' && vice === 'C') ||
+                (leader === 'C' && vice === 'S');
+
+            if (isSecurityCommunication) {
+                finalLeader = 'SC';
+            }
+
+            leader_desc = PORTFOLIO_DESC[leader] || '';
+
+            // Найти Anchor
+            const anchors = { SV: scores.Anc_SV, EC: scores.Anc_EC, TF: scores.Anc_TF, CH: scores.Anc_CH, GM: scores.Anc_GM, AU: scores.Anc_AU };
+            const anchorPriority = ['SV', 'EC', 'TF', 'CH', 'GM', 'AU'];
+            const anchorSorted = Object.entries(anchors).sort((a, b) => {
+                if (b[1] !== a[1]) return b[1] - a[1];
+                return anchorPriority.indexOf(a[0]) - anchorPriority.indexOf(b[0]);
+            });
+
+            let anchor = anchorSorted[0][0];
+            if (anchorSorted[0][1] < 6) anchor = 'SV';
+
+            const warning = scores.Score_Val > 30;
+            const warningSmall = '«Система заметила, что ты склонен немного приукрашивать свои интересы. Твой результат ниже — это твой потенциал, но старайся чаще прислушиваться к своим настоящим желаниям, а не к тому, как "надо"».';
+            const warningBig = '«Похоже, ты очень старался отвечать "правильно" и быть идеальным в глазах системы. Это могло немного исказить твой Цифровой Код. Мы подготовили отчет, но рекомендуем пройти тест еще раз, отвечая более расслабленно — здесь нет неправильных ответов!»';
+            const warningText =
+                scores.Score_Val > 40
+                    ? warningBig
+                    : scores.Score_Val > 30
+                        ? warningSmall
+                        : '';
+
+
+            // Собираем контактные данные
+            const userData = {
+                name: answers[50] || '',
+                phone: answers[51] || '',
+                email: answers[52] || '',
+                leader: finalLeader,
+                vice: vice,
+                anchor: anchor,
+                scores: riasec,
+                city_name: CITY_NAME
+            };
+
+            const userDataCRM = {
+                name: answers[50] || '',
+                phone: answers[51] || '',
+                email: answers[52] || '',
+                leader: getDecodedCRMValue(leader),
+                anchor: getDecodedCRMValue(anchor),
+                city_name: CITY_NAME
+            };
+
+            displayResults({ leader: finalLeader, vice, anchor, scores: riasec, warning, warningText });
+            sendDataToGoogleSheets(userData, userDataCRM);
+        }
+
+        function displayResults(result) {
+            const container = document.getElementById('resultsContainer');
+            const leaderProfile = PROFILES[result.leader];
+            const viceProfile = PROFILES[result.vice];
+
+            const professions = leaderProfile.professions
+                .split(',')
+                .map(item => `<div class="profession-chip">${item.trim()}</div>`)
+                .join('');
+
+            let html = `
+                <div class="result-card">
+                    <h1>${answers[52]}, твой Цифровой Код 2026 расшифрован!</h1>
+                    <h3>&#x2728; ТВОИ ПРИОРИТЕТНЫЕ СФЕРЫ: </h3>
+                    <h3>${PROFILES[result.leader].name}</h3>
+                    <p>${PROFILES[result.leader].desc}</p>
+                    <p>Примеры профессий: ${PROFILES[result.leader].professions}</p>
+                    <p>Флагманская профессия: ${PROFILES[result.leader].flagship.name}</p>
+                    <p>Описание: ${PROFILES[result.leader].flagship.desc}</p>
+                    <p>KPI: ${PROFILES[result.leader].flagship.kpi}</p>
+                    <p>Зарплата: ${PROFILES[result.leader].flagship.salary}</p>
+                    <h3>${PROFILES[result.vice].name}</h3>
+                    <p>${PROFILES[result.vice].desc}</p>
+                </div>
+
+                <div class="result-card">
+                    <h3>&#x1F4A1; ТВОЙ КАРЬЕРНЫЙ ЯКОРЬ: ${ANCHORS[result.anchor].name}</h3>
+                    <p>${ANCHORS[result.anchor].advice}</p>
+                </div>
+
+                <div class="result-card">
+                    <h3>&#x1F680; ТВОЯ ДОРОЖНАЯ КАРТА:</h3>
+                    <p>1. Для старта в твоей профессии (${PROFILES[result.leader].name}) в 2026 году критически важна комбинация теории и практики.</p>
+                    <ul>
+                        <ol>СУЗ (Колледж): идеальный выбор, если ты хочешь получить профессию и начать зарабатывать уже в 17–18 лет. Выбирай те учебные заведения, где обучение идет на реальных кейсах.</ol>
+                        <ol>ВУЗ: необходим, если ты планируешь строить карьеру архитектора систем или метишь в ТОП-менеджмент международных корпораций.</ol> 
+                    </ul>
+                    <p>2. В IT твое портфолио важнее оценок. Начинай собирать его с первого курса.
+                    Для сферы ${PROFILES[result.leader].name}: ${leader_desc}</p>
+                    <p>3. Не жди диплома, чтобы начать знакомство с рынком.</p>
+                    <ul>
+                        <ol>Посещай митапы и хакатоны: это лучшие места, чтобы найти ментора или будущего работодателя.</ol>
+                        <ol>Стажировки: выбирай такие программы обучения, которые имеют прямые связи с IT-гигантами. Твоя цель — выйти на первую стажировку на 1–2 курсе.</ol> 
+                    </ul>
+                </div>
+
+                <div class="result-skills">
+                    <h3>&#x1F4CA; Ваши компетенции</h3>
+                    </div>
+
+                <div class="scores-grid">
+                    ${['S', 'L', 'V', 'M', 'C'].map((key, idx) => {
+                const labels = ['Системное мышление', 'Практический подход', 'Творческий подход', 'Творческий подход', 'Коммуникатор'];
+                return `<div class="score-item" onclick="openScorePopup('${key}')" style="cursor:pointer;"><div class="score-label">${labels[idx]}</div><div class="score-value">${result.scores[key]}</div></div>`;
+            }).join('')}
+                </div>
+            `;
+
+            if (result.warning) {
+                html += `<div class="result-card validation"><h3>⚠️ Внимание</h3><p>${result.warningText}</p></div>`;
+            }
+
+            container.innerHTML = html;
+            showScreen('results');
+        }
+
+        function createOrGetHiddenCRMForm() {
+            let form = document.getElementById('quizCRMHiddenForm');
+            if (!form) {
+                form = document.createElement('form');
+                form.id = 'quizCRMHiddenForm';
+                form.style.display = 'none';
+                document.body.appendChild(form);
+            }
+            return form;
+        }
+
+        function updateHiddenCRMForm(userDataCRM) {
+            const form = createOrGetHiddenCRMForm();
+            form.innerHTML = '';
+
+            Object.entries(userDataCRM || {}).forEach(([key, value]) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = value || '';
+                form.appendChild(input);
+            });
+        }
+
+        function sendDataToGoogleSheets(userData, userDataCRM) {
+            const loadingMsg = document.getElementById('loadingMessage');
+            loadingMsg.style.display = 'block';
+
+            // Создаем/обновляем скрытую форму только с CRM-данными квиза
+            updateHiddenCRMForm(userDataCRM);
+
+            // ========== ЗАМЕНИ НА ТВОЙ GOOGLE APPS SCRIPT URL ==========
+            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby_UUxX5IgsU1XJCxIAXbPx6x_l0thNQpEgzZe14w8zVkLn1LPSXOAmjSWkSlgbRDQ4/exec';
+
+            // Опционально: CRM Webhook URL
+            const CRM_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby_UUxX5IgsU1XJCxIAXbPx6x_l0thNQpEgzZe14w8zVkLn1LPSXOAmjSWkSlgbRDQ4/exec';
+
+            // Отправляем в Google Sheets через Apps Script
+            fetch(GOOGLE_APPS_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData),
+                mode: 'no-cors'
+            }).then(() => {
+                console.log('Данные отправлены в Google Sheets');
+
+                // Отправляем в CRM если URL указан
+                if (CRM_WEBHOOK_URL !== 'https://script.google.com/macros/s/AKfycby_UUxX5IgsU1XJCxIAXbPx6x_l0thNQpEgzZe14w8zVkLn1LPSXOAmjSWkSlgbRDQ4/exec') {
+                    return fetch(CRM_WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(userDataCRM)
+                    });
+                }
+            }).then(() => {
+                console.log('Данные успешно отправлены');
+                loadingMsg.style.display = 'none';
+            }).catch(error => {
+                console.log('Данные отправлены:', error);
+                loadingMsg.style.display = 'none';
+            });
+        }
+
+        document.getElementById('totalQuestions').textContent = QUESTIONS.length;
+    </script>
+</body>
+
+</html>
