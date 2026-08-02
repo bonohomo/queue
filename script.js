@@ -5035,49 +5035,49 @@ $ - конец строки (после последовательности н�
 
 
 
-let registrationForm = document.getElementById("registrationForm");
-let errorMessages = document.getElementById("errorMessages");
+// let registrationForm = document.getElementById("registrationForm");
+// let errorMessages = document.getElementById("errorMessages");
 
 
-registrationForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    console.log(registrationForm.elements);
+// registrationForm.addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     console.log(registrationForm.elements);
 
-    let [username, email, password] = registrationForm.elements; // деструктуризация, чтобы можно было удобнее обратиться к каждому элементу
-    console.log(username, email, password);
+//     let [username, email, password] = registrationForm.elements; // деструктуризация, чтобы можно было удобнее обратиться к каждому элементу
+//     console.log(username, email, password);
 
-    errorMessages.innerHTML = "";
+//     errorMessages.innerHTML = "";
 
-    if (!username.value.trim()) { // убираем пробелы и смотрим, есть ли текстовый контент
-        displayError("Имя пользователя обязательно");
-        return; // отменяем отправку данных из формы
-    }
+//     if (!username.value.trim()) { // убираем пробелы и смотрим, есть ли текстовый контент
+//         displayError("Имя пользователя обязательно");
+//         return; // отменяем отправку данных из формы
+//     }
 
-    if (!email.value.trim() || !isValidEmail(email.value)) {
-        displayError("Введите адрес электронной почты");
-        return;
-    }
+//     if (!email.value.trim() || !isValidEmail(email.value)) {
+//         displayError("Введите адрес электронной почты");
+//         return;
+//     }
 
-    if (!password.value.trim() || !isStrongPassword(password)) {
-        displayError("Пароль должен состоять из минимум 8ми символов и как минимум одну заглавную букву, одну строчную букву, одну цифру и специальный символ");
-        return;
-    }
+//     if (!password.value.trim() || !isStrongPassword(password)) {
+//         displayError("Пароль должен состоять из минимум 8ми символов и как минимум одну заглавную букву, одну строчную букву, одну цифру и специальный символ");
+//         return;
+//     }
 
-    alert("Register successfull!");
-    registrationForm.reset(); // встроенная функция для очистки полей формы
-});
+//     alert("Register successfull!");
+//     registrationForm.reset(); // встроенная функция для очистки полей формы
+// });
 
-function displayError(message) {
-    errorMessages.innerHTML += `<div class='error'>${message}</div>`;
-}
+// function displayError(message) {
+//     errorMessages.innerHTML += `<div class='error'>${message}</div>`;
+// }
 
-function isValidEmail (email) {
-    return /^[\w.%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email);
-}
+// function isValidEmail (email) {
+//     return /^[\w.%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email);
+// }
 
-function isStrongPassword (password) {
-    return /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*]).{8,}$/.test(password); // (?=.*\d) - есть хотя бы одна цифра
-}
+// function isStrongPassword (password) {
+//     return /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*]).{8,}$/.test(password); // (?=.*\d) - есть хотя бы одна цифра
+// }
 
 
 
@@ -6603,3 +6603,38 @@ function isStrongPassword (password) {
 // });
 
 // // commit
+
+
+
+
+
+
+
+
+
+
+
+// ЗАНЯТИЕ 01.08 ПРОПУЩЕННОЕ
+
+
+
+
+
+// ЗАНЯТИЕ 02.08
+
+
+// sessionStorage - хранится только до закрытия браузера
+// localStorage - будут хранится даже после закрытия браузера
+
+// localStorage.setItem("data", 1);
+// alert(localStorage.getItem("data"));
+
+// ==
+
+// localStorage.test = 2;
+// alert(localStorage.test);
+// delete localStorage.test;
+
+localStorage.setItem("username", "Марина");
+localStorage.setItem("surname", "Ветрова");
+alert(localStorage.length);
