@@ -6795,43 +6795,325 @@ $ - конец строки (после последовательности н�
 // sessionStorage.clear();
 
 
-class ThemeSwitcher {
-    constructor() {
-        this.selectors = {switcherThemeButton: '[data-switcher]'};
-        this.themes = {
-            dark: 'dark',
-            light: 'light'
-        }
+// class ThemeSwitcher {
+//     constructor() {
+//         this.selectors = {switcherThemeButton: '[data-switcher]'};
+//         this.themes = {
+//             dark: 'dark',
+//             light: 'light'
+//         }
 
-        this.stateClasses = {isDarkTheme: "is-dark-theme"};
+//         this.stateClasses = {isDarkTheme: "is-dark-theme"};
 
-        this.storageKey = "theme";
+//         this.storageKey = "theme";
 
-        this.switcherThemeButtonElement = document.querySelector(this.selectors.switcherThemeButton);
+//         this.switcherThemeButtonElement = document.querySelector(this.selectors.switcherThemeButton);
 
-        this.setInitialTheme()
-    }
+//         this.setInitialTheme()
+//     }
 
-    get isDarkThemeCached() {
-        return sessionStorage.getItem(this.storageKey) === this.themes.dark;
-    }
+//     get isDarkThemeCached() {
+//         return sessionStorage.getItem(this.storageKey) === this.themes.dark;
+//     }
 
-    setInitialTheme() {
-        document.documentElement.classList.toggle(this.stateClasses.isDarkTheme, this.darkThemeCached);
-    }
+//     setInitialTheme() {
+//         document.documentElement.classList.toggle(this.stateClasses.isDarkTheme, this.darkThemeCached);
+//     }
 
-    onClick = () => {
-        sessionStorage.setItem(
-            this.storageKey,
-            this.isDarkThemeCached ? this.themes.light : this.themes.dark
-        )
+//     onClick = () => {
+//         sessionStorage.setItem(
+//             this.storageKey,
+//             this.isDarkThemeCached ? this.themes.light : this.themes.dark
+//         )
 
-        document.documentElement.classList.toggle(this.stateClasses.isDarkTheme);
-    }
+//         document.documentElement.classList.toggle(this.stateClasses.isDarkTheme);
+//     }
 
-    bindEvents() {
-        this.switcherThemeButtonElement.addEventListener("click", this.onClick);
-    }
-}
+//     bindEvents() {
+//         this.switcherThemeButtonElement.addEventListener("click", this.onClick);
+//     }
+// }
 
-new ThemeSwitcher();
+// new ThemeSwitcher();
+
+
+
+// const sum1 = 120323;
+// const sum2 = 100200200;
+// const sum3 = 1600.33;
+
+// // document.writeln(`
+// //     ${sum1.toLocaleString()} <br>
+// //     ${sum2.toLocaleString("ru")} <br>
+// //     ${sum3.toLocaleString("en")} <br>
+// //     `); // удобное представление чисел с разделителями
+
+// const num = 0.1;
+
+// document.writeln(`<div>
+//     ${sum1.toLocaleString({
+//         style: 'decimal'
+//     })} <br>
+//     ${num.toLocaleString(("ru"), {
+//         style: 'percent'
+//     })} <br>
+//     ${sum2.toLocaleString(("ru"), {
+//         style: 'currency',
+//         currency: 'rub'
+//     })} <br>
+//     ${sum3.toLocaleString(("en"), {
+//         style: 'currency',
+//         currency: 'USD'
+//     })} <br>
+//     ${sum3.toLocaleString(("ru"), {
+//         style: 'currency',
+//         currency: 'EUR',
+//         currencyDisplay: 'name'
+//     })} <br>
+//     </div>`); // при передаче объектов в функцию можно получить больше стилей и вариантов
+
+// ~==
+
+// document.writeln(`<div>
+//     ${new Intl.NumberFormat("ru", {
+//     style: 'currency',
+//     currency: 'EUR',
+//     currencyDisplay: 'name',
+//     minimumFractionDigits: 0
+// }).format(sum2)} <br>
+//     </div>`); // то же, но через классы и можно вынести в отдельную переменную
+
+// const toEuro = new Intl.NumberFormat("ru", {
+//     style: 'currency',
+//     currency: 'EUR',
+//     currencyDisplay: 'name',
+//     minimumFractionDigits: 0
+// });
+
+// document.writeln(`<div>${toEuro.format(sum2)}</div>`);
+
+
+// const now = new Date();
+// console.log(now);
+
+
+// const locale = navigator.language; // язык настройки системы пользователя
+
+// const dateOptions = {
+//     day: 'numeric',
+//     month: 'long', // 2-digit || short (короткое название) || long (полное название)
+//     year: '2-digit', // numeric
+//     era: 'long', // era - это от Рождества Христова short
+//     weekday: 'long',
+//     timeZoneName: 'short',
+//     hour: "2-digit",
+//     // hour12: true,
+//     minute: '2-digit',
+//     second: '2-digit'
+// }; // дополнительное значение
+
+// const UserDate = new Intl.DateTimeFormat("locale", dateOptions);
+// const RuDate = new Intl.DateTimeFormat("ru", dateOptions);
+// const USDate = new Intl.DateTimeFormat("en-US", dateOptions);
+// const UKDate = new Intl.DateTimeFormat("en-UK", dateOptions);
+
+// document.writeln(`<ul>
+//         <li>${RuDate.format(now)}</li>
+//         <li>${USDate.format(now)}</li>
+//         <li>${UKDate.format(now)}</li>
+
+//         <li>${UserDate.format(now)}</li>
+//     </ul>`);
+
+
+
+// const rtf = new Intl.RelativeTimeFormat("ru", {
+//     numeric: 'auto', // always
+//     style: 'long', // short
+//     localeMatcher: 'best fit'
+// }); // по времени считать, сколько вперёд и назад
+
+// console.log(rtf.format(1, 'minute'));
+// console.log(rtf.format(1, 'day'));
+// console.log(rtf.format(-1, 'day'));
+// console.log(rtf.format(2, 'day'));
+// console.log(rtf.format(-2, 'day'));
+// console.log(rtf.format(-20, 'day'));
+
+
+// function getRelativeTimeString(date, lang=navigator.language){
+//     const timeMs = typeof date === 'number' ? date : date.getTime();
+
+//     const deltaSeconds = Math.round((timeMs - Date.now()) / 1000);
+
+//     const cutoffs = [60, 3600, 86400, 86400 * 7, 86400 * 30, 86400 * 365, Infinity];
+
+//     const units = ['second', 'minute', 'hour', 'day', 'week', 'month', 'year'];
+
+//     const unitIndex = cutoffs.findIndex(cutoff => cutoff > Math.abs(deltaSeconds)); // abs - возвращает абсолютное значение числа - если отриц на -1 умножается
+
+//     const divisor = unitIndex ? cutoffs[unitIndex - 1] : 1;
+
+//     const rtf = new Intl.RelativeTimeFormat(lang, {numeric: 'auto'});
+
+//     return rtf.format(Math.floor(deltaSeconds / divisor), units[unitIndex]);
+// }
+
+// console.log(getRelativeTimeString(new Date("2026-08-23T00:55:04"), 'ru'));
+// console.log(getRelativeTimeString(new Date("2026-09-23"), 'ru'));
+// console.log(getRelativeTimeString(new Date("2026-08-18"), 'ru'));
+
+
+// const formatter = new Intl.NumberFormat("ru", {
+//     style: 'unit',
+//     // unit: 'meter', // перечислены https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_unit_identifiers
+//     unit: 'meter-per-second',
+//     unitDisplay: 'long'
+// });
+
+// document.writeln(`<ul>
+//         <li>${formatter.format(100)}</li>
+//         <li>${formatter.format(101)}</li>
+//         <li>${formatter.format(102)}</li>
+//         <li>${formatter.format(105)}</li>
+//         <li>${formatter.format(108)}</li>
+//         <li>${formatter.format(111)}</li>
+//         <li>${formatter.format(121)}</li>
+//     </ul>`);
+
+
+
+// смотрели структуры данных массивы, объекты
+// но существуют с недавнего времени ещё две структуры
+// Map Set (коллекция только уникальных значений)
+
+// let obj = {} // всегда будет true, даже если переменная пустая, т.к. в ней что-то есть, другие языки программирования так не позволяют
+
+// obj[{id: 1}] = "first";
+// obj[{id: 2}] = "second"; // перезапишет первую запись, подводный камень объектов
+
+// console.log(obj);
+
+
+// let obj = {40: "число", true: "boolean"}
+// console.log(Object.keys(obj).length); // получаем длинну объекта, только так для объектов
+
+
+// Map же позволяет преодолеть все эти нюансы
+
+// Map ключом может быть любое значение типа данных
+
+// let obj = {"1": "one", 1: "один"};
+// console.log(obj);
+
+
+// let map = new Map();
+// let obj = {7: "семь"};
+// let mas = [3,4];
+// map.set(5, "число");
+// map.set("5", "строка");
+// map.set("5", "пять"); // затрёт, нужны разные типы данных, их не затрёт, то есть удалятся только полностью одинаковые значения ===
+// map.set(mas, "массив");
+// map.set(obj, "объект");
+
+
+// console.log(map);
+// console.log(map.get(5)); //получить значение ключа
+// console.log(map.get("5"));
+// console.log(map.get(mas));
+// console.log(map.get(obj));
+
+// console.log(map.size); // вместо length
+// console.log(map.has(mas)); // есть ли ключ // true - да, ошибка - нет
+
+// map.delete(mas); // удалить ключ
+// console.log(map);
+
+// map.clear(); // полностью очистить
+// console.log(map);
+
+// for(let elem of map){
+//     document.writeln(elem + "<br>");
+//     console.log(elem);
+// }
+
+// for(let [key, elem] of map) {
+//     document.writeln("*************************<br>");
+//     document.writeln(key + "<br>");   
+//     document.writeln(elem + "<br>");   
+// }
+
+
+// let values = map.values();
+// console.log(values); // по индексу обратиться не можем
+
+// let keys = map.keys();
+// console.log(keys);
+
+// let entries = map.entries(); // ключи и значения
+// console.log(entries);
+
+
+
+// for(let el of map.values()){
+//     console.log(el);
+// }
+
+// for(let el of map.keys()){
+//     console.log(el);
+// }
+
+// for(let el of map.entries()){
+//     console.log(el);
+// }
+
+
+// let maps = new Map();
+
+// maps.set("1", "one")
+//     .set(1, "first")
+//     .set(true, "bool"); // так можно эффективнее добавлять
+
+// console.log(maps);
+
+
+// maps.forEach((value, key) => {
+//     document.writeln(`${key}: ${value} <br>`)
+// });
+
+// ==
+
+// let maps = new Map([
+//     ["1", "one"],
+//     [1, "first"],
+//     [true, "bool"]
+// ]); // можно создать сразу через массивы
+
+// console.log(maps);
+
+
+// maps.forEach((value, key) => {
+//     document.writeln(`${key}: ${value} <br>`)
+// });
+
+
+// const users = [
+//     { name: "Alex", age: 25 },
+//     { name: "Bob", age: 30 },
+//     { name: "Mary", age: 25 },
+//     { name: "Joy", age: 30 },
+//     { name: "Gary", age: 35 }
+// ];
+
+// const byAge = Map.groupBy(users, user => user.age); // сгруппированные объекты по ключу age
+// console.log(byAge);
+
+// const age25 = byAge.get(25);
+// console.log(age25); // вывели всех, кому 25
+
+
+const items = [1, 2, 3, 4, 5];
+
+const enumerate = Map.groupBy(items, n => n % 2 === 0 ? "even" : "odd");
+console.log(enumerate);
+
