@@ -7112,8 +7112,178 @@ $ - конец строки (после последовательности н�
 // console.log(age25); // вывели всех, кому 25
 
 
-const items = [1, 2, 3, 4, 5];
+// const items = [1, 2, 3, 4, 5];
 
-const enumerate = Map.groupBy(items, n => n % 2 === 0 ? "even" : "odd");
-console.log(enumerate);
+// const enumerate = Map.groupBy(items, n => n % 2 === 0 ? "even" : "odd");
+// console.log(enumerate);
+
+
+// let obj = {
+//     name: "Сергей",
+//     age: 30
+// }
+
+// console.log(Object.entries(obj)); // возвращает массив в массиве
+
+
+// let map = new Map(Object.entries(obj));
+// document.writeln(map.get("name"));
+// console.log(map);
+
+// let obj1 = Object.fromEntries(map);
+// console.log(obj1);
+
+
+// const myObj = {};
+// let start1 = new Date().getTime();
+
+// for(let i = 0; i <= 10000000; i++){
+//     myObj[i] = i;
+//     delete myObj[i];
+// }
+// console.log(new Date().getTime() - start1);
+
+// const myMap = new Map();
+// let start2 = new Date().getTime();
+
+// for(let i = 0; i <= 10000000; i++){
+//     myMap.set(i, i);
+//     myMap.delete(i);
+// }
+
+// console.log(new Date().getTime() - start2);
+
+
+// Set (с англ. - множество) - множество значений без ключей, где не могут повторяться элементы
+// индексы тут не работают
+
+// const set = new Set();
+// set.add(5)
+//    .add(9)
+//    .add(5); // не добавляется, т.к. это дубль существующего значения
+
+// console.log(set);
+
+// const set = new Set([1,2,3,3,5,6,7,8,8]);
+// console.log(set);
+// // console.log(set.has(7));
+// // // set.delete(4);
+// // // console.log(set);
+// // // set.clear;
+// // // console.log(set);
+
+// // for(let elem of set){
+// //     console.log(elem);
+
+// // }
+
+// // set.forEach(value => document.writeln(value + "<br>"));
+
+
+
+// let arr = [...set]; // принцип деструктуризации
+// console.log(arr);
+
+// let arr2 = Array.from(set); // получаем массив из Set
+// console.log(arr2);
+
+
+// let mas = [5,9,2];
+// let set = new Set(mas);
+// console.log(set);
+
+
+
+// можно преобразовать массив в Set и потом обратно, чтобы избавитсья от дубликатов
+
+// let mas = [5, 5, 9, 9, 2];
+// let set = new Set(mas);
+// console.log(set);
+// let mas2 = [...set];
+// console.log(mas2);
+
+// ==
+
+// топовый способ
+// let mas = [5, 5, 9, 9, 2];
+// console.log(mas);
+// let mas2 = [...new Set(mas)];
+// console.log(mas2);
+
+
+// считаем посетителей
+// class VisitorTracker{
+//     constructor(){
+//         this.visitors = new Set();
+//         this.totalVisits = 0;
+//     }
+
+//     registerVisit(userId){
+//         this.totalVisits++;
+//         this.visitors.add(userId);
+//     }
+
+//     getUniqueCount(){
+//         return this.visitors.size;
+//     }
+
+//     getNewVisitorPercent(){
+//         if(this.totalVisits === 0){
+//             return 0;
+//         }
+//         return (this.visitors.size / this.totalVisits) * 100;
+//     }
+// }
+
+// const tracker = new VisitorTracker(); // создаём конструктор класса
+
+// tracker.registerVisit("user_1");
+// tracker.registerVisit("user_2");
+// tracker.registerVisit("user_1");
+// tracker.registerVisit("user_3");
+// tracker.registerVisit("user_2");
+
+// console.log(`Всего визитов: ${tracker.totalVisits}`);
+// console.log(`Уникальных посетителей: ${tracker.getUniqueCount()}`);
+// console.log(`Процент новых посетителей: ${tracker.getNewVisitorPercent()}%`);
+
+
+// объединение Set
+
+// const one = new Set(['first', 'second', 'third', 'fourth']);
+// const two = new Set(['second', 'fifth', 'fourth', 'six']);
+
+// const union = one.union(two);
+// console.log(union);
+
+// const uni = one.union(two);
+// console.log([...uni]);
+
+
+// const both = one.intersection(two); // получаем только элементы, которые есть в двух Set
+// console.log(both);
+// console.log([...both]); // обычный массив из сета
+
+// const onlyOne = one.difference(two); // берёт из первого сета вычитает второй сет, убирает из первого повторяющиеся, которые есть во втором
+// console.log(onlyOne);
+
+
+// const onlyTwo = two.difference(one); // наоборот
+// console.log([...onlyTwo]);
+
+
+// const unique  = one.symmetricDifference(two); // даёт набор уникальных значений, не переносит в третий сет повторы
+// console.log([...unique]);
+
+
+
+
+// AJAX
+// технология взаимодейтсвия с сервером без перзагрузки страницы
+// есть два способа применения
+
+// Asynchronous
+// JavaScript
+// And
+// XML(JSON)
 
