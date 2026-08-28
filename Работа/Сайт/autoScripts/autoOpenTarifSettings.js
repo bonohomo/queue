@@ -19,3 +19,20 @@ document.addEventListener('auxclick', (e) => {
   console.log('Открываем:', url.toString());
   window.open(url.toString(), '_blank');
 }, true); // true — слушаем на этапе перехвата, чтобы точно поймать событие
+
+document.addEventListener('auxclick', (e) => {
+  const a = e.target.closest('a');
+  
+  if (!a || !a.href) return;
+
+  e.preventDefault();
+
+  const url = new URL(a.href, window.location.href);
+
+  if (!url.pathname.endsWith('/settings')) {
+    url.pathname = url.pathname.replace(/\/?$/, '') + '/settings';
+  }
+
+  console.log('Открываем:', url.toString());
+  window.open(url.toString(), '_blank');
+}, true);
