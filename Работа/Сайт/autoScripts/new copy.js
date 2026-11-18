@@ -4,7 +4,7 @@
   // НАСТРОЙКИ
   // ============================================================
 
-  const PRICE = "4560";
+  const PRICE = "8000";
   const BASE_URL = location.origin;
 
   const INPUT_TIMEOUT = 60000;
